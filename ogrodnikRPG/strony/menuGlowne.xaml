@@ -1,0 +1,42 @@
+﻿<Page x:Class="ogrodnikRPG.strony.menuGlowne"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ogrodnikRPG.strony"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="menuGlowne">
+
+
+    <Viewbox Stretch="Uniform">
+    <Grid Width="1200" Height="700">
+        <Grid.Background>
+            <ImageBrush ImageSource="/resource/trawa.png"/>
+        </Grid.Background>
+        <Grid>
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="Green" Opacity="0.5"/>
+                </Grid.Background>
+
+                
+                <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0" FontFamily="Baloo" FontSize="90" Foreground="White" >O'grodnik simulator</TextBlock>
+
+                <Image Source="/resource/ogrodnik.png" Margin="36,221,794,93"></Image>
+                <Image Source="/resource/kwiatek.png" Margin="811,273,205,193"></Image>
+                <Image Source="/resource/kwiatek2.png" Margin="958,452,42,12"></Image>
+                <Image Source="/resource/krecik.png" Margin="958,132,42,332"></Image>
+
+
+                <Button Cursor="Hand" Width="350" Height="100" Content="ZAGRAJ" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,221,425,379"/>
+                <Button Cursor="Hand" Width="350" Height="100" Content="JAK GRAĆ?" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,340,425,260"/>
+                <Button Cursor="Hand" Width="350" Height="100" Content="PRZECIWNICY" Click="showPrzeciwnicy" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,456,425,144"/>
+                <Button Cursor="Hand" Width="350" Height="100" Content="WYJDŹ" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,570,425,30"/>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+    </Viewbox>
+</Page>
