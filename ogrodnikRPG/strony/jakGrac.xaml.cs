@@ -24,5 +24,15 @@ namespace ogrodnikRPG.strony
         {
             InitializeComponent();
         }
+
+        public void showMenuGlowne(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("strony/menuGlowne.xaml", UriKind.Relative));
+        }
+
+        public void showSterowanie(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("strony/sterowanie.xaml", UriKind.Relative));
+        }
     }
 }

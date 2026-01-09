@@ -9,15 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resource\chwast.png" />
     <None Remove="resource\king-von-piracy.gif" />
     <None Remove="resource\krecik.png" />
     <None Remove="resource\kwiatek.png" />
     <None Remove="resource\kwiatek2.png" />
     <None Remove="resource\ogrodnik.png" />
+    <None Remove="resource\sekator.png" />
+    <None Remove="resource\spray.png" />
+    <None Remove="resource\stonka.png" />
+    <None Remove="resource\tloPomoc.png" />
+    <None Remove="resource\tloPrzeciwnicy.png" />
+    <None Remove="resource\tloZasady.jpg" />
     <None Remove="resource\trawa.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="resource\chwast.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="resource\king-von-piracy.gif" />
     <Resource Include="resource\krecik.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -29,6 +39,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\ogrodnik.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\sekator.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\spray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\stonka.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\tloPomoc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\tloPrzeciwnicy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\trawa.png">

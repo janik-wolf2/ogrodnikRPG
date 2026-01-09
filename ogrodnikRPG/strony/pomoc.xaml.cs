@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ogrodnikRPG.strony
 {
     /// <summary>
-    /// Logika interakcji dla klasy przeciwnicy.xaml
+    /// Logika interakcji dla klasy pomoc.xaml
     /// </summary>
-    public partial class przeciwnicy : Page
+    public partial class pomoc : Page
     {
-        public przeciwnicy()
+        public pomoc()
         {
             InitializeComponent();
         }
@@ -28,6 +28,11 @@ namespace ogrodnikRPG.strony
         public void showMenuGlowne(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("strony/menuGlowne.xaml", UriKind.Relative));
+        }
+
+        public void showSterowanie(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("strony/sterowanie.xaml", UriKind.Relative));
         }
     }
 }

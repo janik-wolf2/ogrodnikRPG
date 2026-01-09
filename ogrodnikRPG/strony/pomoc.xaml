@@ -1,4 +1,4 @@
-﻿<Page x:Class="ogrodnikRPG.strony.jakGrac"
+﻿<Page x:Class="ogrodnikRPG.strony.pomoc"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,13 +6,13 @@
       xmlns:local="clr-namespace:ogrodnikRPG.strony"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
-      Title="jakGrac">
+      Title="pomoc">
 
     <Viewbox Stretch="Uniform">
         <Grid Width="1200" Height="700">
             <Grid>
                 <Grid.Background>
-                    <ImageBrush ImageSource="/resource/tloZasady.jpg"></ImageBrush>
+                    <ImageBrush ImageSource="/resource/tloPomoc.png"></ImageBrush>
                 </Grid.Background>
             </Grid>
 
@@ -23,9 +23,12 @@
                 <TextBlock Text="Jak grać?" HorizontalAlignment="Center" Margin="0,30,0,531" FontFamily="Baloo" FontSize="80" Foreground="White" />
                 <Button Cursor="Hand" Content="Powrót" Click="showMenuGlowne" FontSize="30" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="24,51,1044,568"/>
 
-                <TextBlock Text="Gracz wciela się w postać ogrodnika. Jego zadaniem jest&#x0a; pokonanie wszystkich wrogów i ochrona kwiatków.&#x0a;Ekwipunek mieści 6 przedmiotów. Gra posiada 3 plansze.&#x0a; Aby dostać się na kolejną należy pokonać wszystkich&#x0a; przeciwników na bieżącej." FontFamily="Baloo" FontSize="38" Foreground="White" Margin="90,174,90,218"></TextBlock>
+                <TextBlock Text="Gracz wciela się w postać ogrodnika. Jego zadaniem jest&#x0a;pokonanie wszystkich wrogów i ochrona kwiatków.&#x0a;Ekwipunek mieści 6 przedmiotów. Gra posiada 3 plansze.&#x0a;Aby dostać się na kolejną należy pokonać wszystkich&#x0a;przeciwników na bieżącej." FontFamily="Baloo" FontSize="38" Foreground="White" Margin="90,174,90,218"></TextBlock>
                 <Button Cursor="Hand" Content="Sterowanie" Click="showSterowanie" FontSize="30" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="975,51,24,568"/>
 
+                <Image Source="/resource/chwast.png" Margin="116,480,871,35"></Image>
+                <Image Source="/resource/ogrodnik.png" Margin="493,487,494,28"></Image>
+                <Image Source="/resource/kwiatek2.png" Margin="876,480,110,35"></Image>
             </Grid>
         </Grid>
     </Viewbox>

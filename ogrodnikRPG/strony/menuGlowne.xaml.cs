@@ -25,11 +25,19 @@ namespace ogrodnikRPG.strony
             InitializeComponent();
         }
 
-        public void showPrzeciwnicy(object sender, EventArgs e)
+        public void showJakGrac(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("XD");
+            NavigationService.Navigate(new Uri("strony/pomoc.xaml", UriKind.Relative));
+        }
+
+        public void showPrzeciwnicy(object sender, RoutedEventArgs e)
+        {
             NavigationService.Navigate(new Uri("strony/przeciwnicy.xaml", UriKind.Relative));
-            
+        }
+
+        public void wyjdzZGry(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

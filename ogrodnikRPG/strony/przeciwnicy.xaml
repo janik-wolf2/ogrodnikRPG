@@ -10,11 +10,33 @@
 
     <Viewbox Stretch="Uniform">
         <Grid Width="1200" Height="700">
+            <Grid.Background>
+                <ImageBrush ImageSource="/resource/tloPrzeciwnicy.png"/>
+            </Grid.Background>
             <Grid>
                 <Grid.Background>
-                    <ImageBrush ImageSource="/resource/king-von-piracy.gif"
-                    Stretch="Fill"/>
+                    <SolidColorBrush Color="Green" Opacity="0.5"/>
                 </Grid.Background>
+
+                <TextBlock Text="Rodzaje przeciwników" HorizontalAlignment="Center" Margin="0,30,0,531" FontFamily="Baloo" FontSize="80" Foreground="White" ></TextBlock>
+                <Button Cursor="Hand" Content="Powrót" Click="showMenuGlowne" FontSize="30" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="24,51,1044,568"/>
+
+
+                <TextBlock Text="Chwast" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,200,981,442"></TextBlock>
+                <Image Source="/resource/chwast.png" Margin="219,166,841,394"></Image>
+                <TextBlock Text="Stoi w miejscu i atakuje, &#x0a; gdy gracz podejdzie za pole sąsiadujące." FontFamily="Baloo" FontSize="38" Foreground="White" Margin="406,177,82,407"></TextBlock>
+
+                <TextBlock Text="Stonka" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,390,981,252"></TextBlock>
+                <Image Source="/resource/stonka.png" Margin="224,350,836,210"></Image>
+                <TextBlock Text="Porusza się w jednej osi i  zawraca przy &#x0a;scianie." FontFamily="Baloo" FontSize="38" Foreground="White" Margin="406,360,82,224"/>
+
+                <TextBlock Text="Krecik" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,550,981,92"/>
+                <Image Source="/resource/krecik.png" Margin="224,510,836,50"/>
+                <TextBlock Text="Jeśli gracz jest w tej samej kolumnie/wierszu &#x0a; bez przeszkód, rusza w jego kierunku." FontFamily="Baloo" FontSize="38" Foreground="White" Margin="406,520,8,64"/>
+
+
+
+
             </Grid>
         </Grid>
     </Viewbox>
