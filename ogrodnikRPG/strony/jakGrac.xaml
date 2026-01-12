@@ -12,7 +12,7 @@
         <Grid Width="1200" Height="700">
             <Grid>
                 <Grid.Background>
-                    <ImageBrush ImageSource="/resource/tloZasady.jpg"></ImageBrush>
+                    <ImageBrush ImageSource="/resource/tloZasady.png"></ImageBrush>
                 </Grid.Background>
             </Grid>
 

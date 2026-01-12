@@ -6,12 +6,15 @@
       xmlns:local="clr-namespace:ogrodnikRPG.strony"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
-      Title="planszaGry">
+      Title="planszaGry"
+      KeyUp="Page_KeyUp"
+      Focusable="True"
+      Loaded="Page_Loaded">
 
     <Viewbox Stretch="Uniform">
         <Grid Width="1200" Height="700">
 
-            <Grid Margin="0,0,282,0">
+            <Grid Margin="0,0,339,0">
                 <Grid.Background>
                     <ImageBrush ImageSource="/resource/trawa.png" Stretch="UniformToFill"/>
                 </Grid.Background>
@@ -19,17 +22,56 @@
                     <Grid.Background>
                         <SolidColorBrush Color="Green" Opacity="0.5"/>
                     </Grid.Background>
+
+                    <Label x:Name="nrPlanszy" Content="Plansza 1" FontSize="25pt" FontFamily="Baloo" Foreground="White" Margin="0,10,0,630" HorizontalAlignment="Center"></Label>
+                    <Label x:Name="wskaznikTury" Content="Tura: 0" FontSize="20pt" FontFamily="Baloo" Foreground="White" Margin="711,28,0,612" HorizontalAlignment="Left"></Label>
+
+                    <Border BorderBrush="White" BorderThickness="3" Margin="40,70,41,10">
+                        <Grid x:Name="siatka">
+
+                        </Grid>
+                    </Border>
+
                 </Grid>
             </Grid>
 
-            <Grid Margin="918,0,0,0">
+            <Grid Margin="861,0,0,0">
                 <Grid.Background>
-                    <ImageBrush ImageSource="/resource/kamien.png" Stretch="Fill"/>
+                    <ImageBrush ImageSource="/resource/zwir.jpg" Stretch="UniformToFill"/>
                 </Grid.Background>
                 <Grid>
                     <Grid.Background>
-                        <SolidColorBrush Color="LightGray" Opacity="0.5"/>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
                     </Grid.Background>
+
+
+                    <Label Content="HP:" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="14,23,193,613"></Label>
+                    <Image Source="/resource/hp100.png" Margin="93,30,10,620"></Image>
+
+                    <Label Content="Ekwipunek" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="65,165,42,440"></Label>
+
+
+                    <Border BorderBrush="White" BorderThickness="5px" Margin="10,250,229,350" Height="100px" Width="100px">
+                        <Image Stretch="Uniform"/>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="5px" Margin="120,250,119,350" Height="100px" Width="100px">
+                        <Image Stretch="Uniform"/>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="5px" Margin="229,250,10,350" Height="100px" Width="100px">
+                        <Image Stretch="Uniform"/>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="5px" Margin="10,361,229,239" Height="100px" Width="100px">
+                        <Image Stretch="Uniform"/>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="5px" Margin="120,361,119,239" Height="100px" Width="100px">
+                        <Image Stretch="Uniform"/>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="5px" Margin="229,361,10,239" Height="100px" Width="100px">
+                        <Image Stretch="Uniform"/>
+                    </Border>
+
+                    <Label Content="Wrogowie: 0" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="53,485,30,120"></Label>
+                    <Label Content="Kwiatki: 0" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="73,580,50,25"></Label>
                 </Grid>
 
             </Grid>

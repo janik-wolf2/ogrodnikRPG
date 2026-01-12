@@ -39,5 +39,10 @@ namespace ogrodnikRPG.strony
         {
             Application.Current.Shutdown();
         }
+
+        public void showPlanszaGry(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("strony/planszaGry.xaml", UriKind.Relative));
+        }
     }
 }

@@ -29,7 +29,7 @@
                 <Image Source="/resource/krecik.png" Margin="958,132,42,332"></Image>
 
 
-                <Button Cursor="Hand" Width="350" Height="100" Content="ZAGRAJ" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,221,425,379"/>
+                <Button Cursor="Hand" Width="350" Height="100" Content="ZAGRAJ" Click="showPlanszaGry" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,221,425,379"/>
                 <Button Cursor="Hand" Width="350" Height="100" Content="POMOC" Click="showJakGrac" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,340,425,260"/>
                 <Button Cursor="Hand" Width="350" Height="100" Content="PRZECIWNICY" Click="showPrzeciwnicy" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,456,425,144"/>
                 <Button Cursor="Hand" Width="350" Height="100" Content="WYJDŹ" Click="wyjdzZGry" FontSize="46" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="425,570,425,30"/>

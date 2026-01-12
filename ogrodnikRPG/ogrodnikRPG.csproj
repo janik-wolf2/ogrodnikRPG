@@ -10,10 +10,17 @@
 
   <ItemGroup>
     <None Remove="resource\chwast.png" />
+    <None Remove="resource\hp100.png" />
+    <None Remove="resource\hp25.png" />
+    <None Remove="resource\hp50.png" />
+    <None Remove="resource\hp75.png" />
+    <None Remove="resource\kamien.png" />
     <None Remove="resource\king-von-piracy.gif" />
     <None Remove="resource\krecik.png" />
     <None Remove="resource\kwiatek.png" />
     <None Remove="resource\kwiatek2.png" />
+    <None Remove="resource\ninja.png" />
+    <None Remove="resource\ninja2.png" />
     <None Remove="resource\ogrodnik.png" />
     <None Remove="resource\sekator.png" />
     <None Remove="resource\spray.png" />
@@ -22,10 +29,26 @@
     <None Remove="resource\tloPrzeciwnicy.png" />
     <None Remove="resource\tloZasady.jpg" />
     <None Remove="resource\trawa.png" />
+    <None Remove="resource\zwir.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="resource\chwast.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\hp100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\hp25.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\hp50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\hp75.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\kamien.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\king-von-piracy.gif" />
@@ -36,6 +59,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\kwiatek2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\ninja.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\ninja2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\ogrodnik.png">
@@ -57,6 +86,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\trawa.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\zwir.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
