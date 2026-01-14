@@ -83,6 +83,11 @@ namespace ogrodnikRPG.strony
             polaPlanszy[0].Source = new BitmapImage(new Uri("/resource/ninja2.png", UriKind.Relative));
         }
 
+        public void stworzWroga()
+        {
+
+        }
+
         public void idzGora()
         {
             if(gracz.getPozycjaY() == 0)
