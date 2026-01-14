@@ -23,7 +23,7 @@
                 <TextBlock Text="Jak grać?" HorizontalAlignment="Center" Margin="0,30,0,531" FontFamily="Baloo" FontSize="80" Foreground="White" />
                 <Button Cursor="Hand" Content="Powrót" Click="showMenuGlowne" FontSize="30" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="24,51,1044,568"/>
 
-                <TextBlock Text="Gracz wciela się w postać ogrodnika. Jego zadaniem jest&#x0a;pokonanie wszystkich wrogów i ochrona kwiatków.&#x0a;Ekwipunek mieści 6 przedmiotów. Gra posiada 3 plansze.&#x0a;Aby dostać się na kolejną należy pokonać wszystkich&#x0a;przeciwników na bieżącej." FontFamily="Baloo" FontSize="38" Foreground="White" Margin="90,174,90,218"></TextBlock>
+                <TextBlock Text="Gracz wciela się w postać ogrodnika. Jego zadaniem jest&#x0a; pokonanie wszystkich wrogów i zebranie kwiatków.&#x0a;Ekwipunek mieści 6 przedmiotów. Gra posiada 3 plansze.&#x0a; Aby dostać się na kolejną należy pokonać wszystkich&#x0a; przeciwników na bieżącej planszy oraz zebrać wszystkie&#x0a;kwiatki." FontFamily="Baloo" FontSize="38" Foreground="White" Margin="90,137,90,215"></TextBlock>
                 <Button Cursor="Hand" Content="Sterowanie" Click="showSterowanie" FontSize="30" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="975,51,24,568"/>
 
                 <Image Source="/resource/chwast.png" Margin="116,480,871,35"></Image>

@@ -9,12 +9,16 @@ namespace ogrodnikRPG.klasy
     internal class Wrog
     {
         private int hp;
+        private int obrazenia;
+        private string kierunek;
         private int pozycjaX;
         private int pozycjaY;
 
-        public Wrog(int startHp, int startX, int startY)
+        public Wrog(int startHp, int startObr, string kier, int startX, int startY)
         {
             hp = startHp;
+            obrazenia = startObr;
+            kierunek = kier;
             pozycjaX = startX;
             pozycjaY = startY;
         }
@@ -22,6 +26,23 @@ namespace ogrodnikRPG.klasy
         public void zmniejszHp(int ilosc)
         {
             hp -= ilosc;
+        }
+
+        public void zmniejszX()
+        {
+            pozycjaX--;
+        }
+        public void zwiekszX()
+        {
+            pozycjaX++;
+        }
+        public void zmniejszY()
+        {
+            pozycjaY--;
+        }
+        public void zwiekszY()
+        {
+            pozycjaY++;
         }
 
         public int getPozycjaX()
@@ -34,6 +55,11 @@ namespace ogrodnikRPG.klasy
             return pozycjaY;
         }
 
+        public string getKierunek()
+        {
+            return kierunek;
+        }
+
         public void setPozycjaX(int x)
         {
             pozycjaX = x;
@@ -42,6 +68,12 @@ namespace ogrodnikRPG.klasy
         {
             pozycjaY = y;
         }
+
+        public void zmianaKierunku(string nowyKierunek)
+        {
+            kierunek = nowyKierunek;
+        }
+
 
     }
 }

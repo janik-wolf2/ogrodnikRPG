@@ -10,6 +10,7 @@ namespace ogrodnikRPG.klasy
     {
         private int hp = 100;
         private int tura = 0;
+        private int zebraneKwiatki = 0;
         private int przedmioty = 0;
         private int pozycjaX = 0;
         private int pozycjaY = 0;
@@ -53,6 +54,16 @@ namespace ogrodnikRPG.klasy
         public int getPozycjaY()
         {
             return pozycjaY;
+        }
+
+        public void zebranoKwiatek()
+        {
+            zebraneKwiatki++;
+        }
+
+        public int getZebraneKwiatki()
+        {
+            return zebraneKwiatki;
         }
     }
 }

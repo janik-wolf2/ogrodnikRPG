@@ -24,7 +24,7 @@
                     </Grid.Background>
 
                     <Label x:Name="nrPlanszy" Content="Plansza 1" FontSize="25pt" FontFamily="Baloo" Foreground="White" Margin="0,10,0,630" HorizontalAlignment="Center"></Label>
-                    <Label x:Name="wskaznikTury" Content="Tura: 0" FontSize="20pt" FontFamily="Baloo" Foreground="White" Margin="711,28,0,612" HorizontalAlignment="Left"></Label>
+                    <Label x:Name="wskaznikTury" Content="Tura: 0" FontSize="20pt" FontFamily="Baloo" Foreground="White" Margin="711,28,0,612" HorizontalAlignment="Left" Width="126"></Label>
 
                     <Border BorderBrush="White" BorderThickness="3" Margin="40,70,41,10">
                         <Grid x:Name="siatka">
@@ -71,7 +71,7 @@
                     </Border>
 
                     <Label Content="Wrogowie: 0" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="53,485,30,120"></Label>
-                    <Label Content="Kwiatki: 0" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="73,580,50,25"></Label>
+                    <Label x:Name="wskaznikKwiatkow" Content="Kwiatki: 0/3" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="59,580,36,25"></Label>
                 </Grid>
 
             </Grid>

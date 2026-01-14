@@ -26,9 +26,19 @@ namespace ogrodnikRPG.strony
             InitializeComponent();
             generujPlansze(10, 8);
             stworzPostac();
+            stworzWroga("chwast");
+            stworzWroga("stonka");
+            stworzWroga("krecik");
+            stworzKwiatka("kwiatek1");
+            stworzKwiatka("kwiatek2");
+            stworzKwiatka("kwiatek2");
         }
         Gracz gracz = new Gracz();
         Plansza plansza1 = new Plansza(3, 3);
+        Random rnd = new Random();
+        Wrog wrogChwast = new Wrog(20, 5, "prawo", 0, 0);
+        Wrog wrogStonka = new Wrog(50, 10, "prawo", 0, 0);
+        Wrog wrogKrecik = new Wrog(60, 25, "prawo", 0, 0);
 
         public void generujPlansze(int szerokosc, int wysokosc)
         {
@@ -83,23 +93,87 @@ namespace ogrodnikRPG.strony
             polaPlanszy[0].Source = new BitmapImage(new Uri("/resource/ninja2.png", UriKind.Relative));
         }
 
-        public void stworzWroga()
+        public void stworzWroga(string typ) //wybieranie losowego wolnego pola i tworzenie na nim wroga
         {
+            List<Image> polaPlanszy = plansza1.getPolaPlanszy();
+            List<Image> wolnePola = new List<Image>();
 
+            foreach(var pole in polaPlanszy)
+            {
+                if (pole.Source == null)
+                {
+                    wolnePola.Add(pole);
+                }
+            }
+
+            Image losoweWolnePole = wolnePola[rnd.Next(wolnePola.Count)];
+            var (x, y) = ((int, int))losoweWolnePole.Tag;
+
+            switch (typ)
+            {
+                case "chwast":
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/chwast.png", UriKind.Relative));
+                    wrogChwast.setPozycjaX(x);
+                    wrogChwast.setPozycjaY(y);
+                    break;
+                case "stonka":
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/stonka.png", UriKind.Relative));
+                    wrogStonka.setPozycjaX(x);
+                    wrogStonka.setPozycjaY(y);
+                    break;
+                case "krecik":
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/krecik.png", UriKind.Relative));
+                    wrogKrecik.setPozycjaX(x);
+                    wrogKrecik.setPozycjaY(y);
+                    break;
+            }
+        }
+
+        public void stworzKwiatka(string typ) //wybieranie losowego wolnego pola i tworzenie na nim kwiatka
+        {
+            List<Image> polaPlanszy = plansza1.getPolaPlanszy();
+            List<Image> wolnePola = new List<Image>();
+
+            foreach (var pole in polaPlanszy)
+            {
+                if (pole.Source == null)
+                {
+                    wolnePola.Add(pole);
+                }
+            }
+
+            Image losoweWolnePole = wolnePola[rnd.Next(wolnePola.Count)];
+
+            switch (typ)
+            {
+                case "kwiatek1":
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/kwiatek.png", UriKind.Relative));
+                    break;
+                case "kwiatek2":
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/kwiatek2.png", UriKind.Relative));
+                    break;
+                case "krecik":
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/krecik.png", UriKind.Relative));
+                    break;
+            }
         }
 
         public void idzGora()
         {
-            if(gracz.getPozycjaY() == 0)
+            if (sprawdzaniePrzeszkody(0, -1) == true)
             {
-                MessageBox.Show("Nie mozesz isc dalej w gore!");
                 return;
             }
 
-            znajdzPoleGracza();
+            if (gracz.getPozycjaY() == 0)
+            {
+                return;
+            }
 
             int pozycjaX = gracz.getPozycjaX();
             int pozycjaY = gracz.getPozycjaY();
+            usunZdjecie(pozycjaX, pozycjaY);
+
             foreach (var pole in plansza1.getPolaPlanszy())
             {
                 var (x, y) = ((int, int))pole.Tag;
@@ -110,20 +184,26 @@ namespace ogrodnikRPG.strony
                     gracz.zmniejszY();
                 }
             }
+
+            ruchyPrzeciwnikow();
         }
 
         public void idzDol()
         {
-            if (gracz.getPozycjaY() == 7)
+            if(sprawdzaniePrzeszkody(0, 1) == true)
             {
-                MessageBox.Show("Nie mozesz isc dalej w dol!");
                 return;
             }
 
-            znajdzPoleGracza();
+            if (gracz.getPozycjaY() == 7)
+            {
+                return;
+            }
 
             int pozycjaX = gracz.getPozycjaX();
             int pozycjaY = gracz.getPozycjaY();
+            usunZdjecie(pozycjaX, pozycjaY);
+
             foreach (var pole in plansza1.getPolaPlanszy())
             {
                 var (x, y) = ((int, int))pole.Tag;
@@ -134,20 +214,26 @@ namespace ogrodnikRPG.strony
                     gracz.zwiekszY();
                 }
             }
+
+            ruchyPrzeciwnikow();
         }
 
         public void idzLewo()
         {
-            if (gracz.getPozycjaX() == 0)
+            if (sprawdzaniePrzeszkody(-1, 0) == true)
             {
-                MessageBox.Show("Nie mozesz isc dalej w lewo!");
                 return;
             }
 
-            znajdzPoleGracza();
+            if (gracz.getPozycjaX() == 0)
+            {
+                return;
+            }
 
             int pozycjaX = gracz.getPozycjaX();
             int pozycjaY = gracz.getPozycjaY();
+            usunZdjecie(pozycjaX, pozycjaY);
+
             foreach (var pole in plansza1.getPolaPlanszy())
             {
                 var (x, y) = ((int, int))pole.Tag;
@@ -158,20 +244,27 @@ namespace ogrodnikRPG.strony
                     gracz.zmniejszX();
                 }
             }
+
+            ruchyPrzeciwnikow();
         }
 
         public void idzPrawo()
         {
-            if (gracz.getPozycjaX() == 9)
+            if (sprawdzaniePrzeszkody(1, 0) == true)
             {
-                MessageBox.Show("Nie mozesz isc dalej w prawo!");
                 return;
             }
 
-            znajdzPoleGracza();
+            if (gracz.getPozycjaX() == 9)
+            {
+                return;
+            }
 
             int pozycjaX = gracz.getPozycjaX();
             int pozycjaY = gracz.getPozycjaY();
+            usunZdjecie(pozycjaX, pozycjaY);
+
+            
             foreach (var pole in plansza1.getPolaPlanszy())
             {
                 var (x, y) = ((int, int))pole.Tag;
@@ -183,13 +276,58 @@ namespace ogrodnikRPG.strony
                 }
             }
 
+            ruchyPrzeciwnikow();
         }
 
-        public void znajdzPoleGracza()
+        public void stonkaPoruszanie()
         {
-            int pozycjaX = gracz.getPozycjaX();
-            int pozycjaY = gracz.getPozycjaY();
+            int pozycjaX = wrogStonka.getPozycjaX();
+            int pozycjaY = wrogStonka.getPozycjaY();
+            string kierunek = wrogStonka.getKierunek();
 
+            if ((sprawdzaniePrzeszkody(1, 0) == true || pozycjaX == 9) && kierunek == "prawo") //zmiana kierunku w lewo
+            {
+                wrogStonka.zmianaKierunku("lewo");
+            }
+
+            if ((sprawdzaniePrzeszkody(-1, 0) == true || pozycjaX == 0) && kierunek == "lewo") //zmiana kierunku w prawo
+            {
+                wrogStonka.zmianaKierunku("prawo");
+            }
+
+            usunZdjecie(pozycjaX, pozycjaY);
+
+            if (wrogStonka.getKierunek() == "prawo")
+            {
+                foreach (var pole in plansza1.getPolaPlanszy())
+                {
+                    var (x, y) = ((int, int))pole.Tag;
+
+                    if (pozycjaX + 1 == x && pozycjaY == y)
+                    {
+                        pole.Source = new BitmapImage(new Uri("/resource/stonka.png", UriKind.Relative));
+                        wrogStonka.zwiekszX();
+                    }
+                }
+            }
+            else
+            {
+                foreach (var pole in plansza1.getPolaPlanszy())
+                {
+                    var (x, y) = ((int, int))pole.Tag;
+
+                    if (pozycjaX - 1 == x && pozycjaY == y)
+                    {
+                        pole.Source = new BitmapImage(new Uri("/resource/stonka.png", UriKind.Relative));
+                        wrogStonka.zmniejszX();
+                    }
+                }
+            }
+        }
+
+
+        public void usunZdjecie(int pozycjaX, int pozycjaY) //znajdowanie pola na ktorym jest gracz i usuwanie jego obrazka
+        {
             foreach (var pole in plansza1.getPolaPlanszy())
             {
                 var (x, y) = ((int, int))pole.Tag;
@@ -199,6 +337,50 @@ namespace ogrodnikRPG.strony
                     pole.Source = null;
                 }
             }
+        }
+
+        public bool sprawdzaniePrzeszkody(int przesuniecieX, int przesuniecieY)
+        {
+            int pozycjaX = gracz.getPozycjaX();
+            int pozycjaY = gracz.getPozycjaY();
+
+            foreach (var pole in plansza1.getPolaPlanszy()) //sprawdzanie czy w poblizu nie stoi wrog albo kwiatek
+            {
+                var (x, y) = ((int, int))pole.Tag;
+
+                if (pozycjaX + przesuniecieX == x && pozycjaY + przesuniecieY == y) //czy pole sie zgadza
+                {
+                    if(pole.Source != null && sprawdzanieKwiatka(pole) == false)
+                    {
+                        return true;
+                    }
+                    else if(sprawdzanieKwiatka(pole) == true) //czy tam jest kwiatek, jesli tak to mozna wejsc na pole
+                    {
+                        gracz.zebranoKwiatek();
+                        wskaznikKwiatkow.Content = "Kwiatki: " + gracz.getZebraneKwiatki().ToString() + "/3";
+                        return false;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool sprawdzanieKwiatka(Image pole)
+        {
+            if (pole.Source is BitmapImage bmp && bmp.UriSource != null)
+            {
+                string uri = bmp.UriSource.ToString();
+                
+                return uri.Contains("kwiatek.png") || uri.Contains("kwiatek2.png");
+            }
+            return false;
+        }
+
+        public void ruchyPrzeciwnikow()
+        {
+            gracz.zwiekszTure();
+            wskaznikTury.Content = "Tura: " + gracz.getTura().ToString();
+            stonkaPoruszanie();
         }
 
         private void Page_KeyUp(object sender, KeyEventArgs e)
