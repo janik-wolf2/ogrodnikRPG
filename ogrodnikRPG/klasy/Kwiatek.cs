@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ogrodnikRPG.klasy
 {
-    internal class Kwiatek
+    internal class Kwiatek : ObiektGry
     {
+
+        public Kwiatek()
+        {
+        }
+
     }
 }
