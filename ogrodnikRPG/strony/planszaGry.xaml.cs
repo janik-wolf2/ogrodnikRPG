@@ -31,13 +31,13 @@ namespace ogrodnikRPG.strony
             stworzWroga("krecik");
             stworzKwiatka("kwiatek1");
             stworzKwiatka("kwiatek2");
-            stworzKwiatka("kwiatek2");
+            stworzKwiatka("kwiatek3");
         }
         Gracz gracz = new Gracz();
         Plansza plansza1 = new Plansza(3, 3);
         Random rnd = new Random();
-        Wrog wrogChwast = new Wrog(20, 5, 0, 0);
-        Stonka wrogStonka = new Stonka(50, 10, "prawo", 0, 0);
+        Wrog wrogChwast = new Wrog(20, 10, 0, 0);
+        Stonka wrogStonka = new Stonka(50, 15, "prawo", 0, 0);
         Wrog wrogKrecik = new Wrog(60, 25, 0, 0);
         Kwiatek kwiatek1 = new Kwiatek();
         Kwiatek kwiatek2 = new Kwiatek();
@@ -229,34 +229,6 @@ namespace ogrodnikRPG.strony
             ruchyPrzeciwnikow();
         }
 
-        public void stonkaPoruszanie()
-        {
-            int pozycjaX = wrogStonka.getPozycjaX();
-            int pozycjaY = wrogStonka.getPozycjaY();
-            string kierunek = wrogStonka.getKierunek();
-
-            if ((sprawdzaniePrzeszkody(wrogStonka, 1, 0) == true || pozycjaX == 9) && kierunek == "prawo") //zmiana kierunku w lewo
-            {
-                wrogStonka.zmianaKierunku("lewo");
-            }
-
-            if ((sprawdzaniePrzeszkody(wrogStonka, - 1, 0) == true || pozycjaX == 0) && kierunek == "lewo") //zmiana kierunku w prawo
-            {
-                wrogStonka.zmianaKierunku("prawo");
-            }
-
-
-            if (wrogStonka.getKierunek() == "prawo")
-            {
-                przesunZdjecie(wrogStonka, pozycjaX, pozycjaY, "prawo", "/resource/stonka.png");
-            }
-            else
-            {
-                przesunZdjecie(wrogStonka, pozycjaX, pozycjaY, "lewo", "/resource/stonka.png");
-            }
-            sprawdzPrzegrana(gracz, wrogStonka);
-        }
-
         internal void przesunZdjecie(ObiektGry obiekt, int pozycjaX, int pozycjaY, string kierunek, string sciezkaZdjecia)
         {
             switch (kierunek)
@@ -343,6 +315,34 @@ namespace ogrodnikRPG.strony
             }
 
         }
+        public void stonkaPoruszanie()
+        {
+            int pozycjaX = wrogStonka.getPozycjaX();
+            int pozycjaY = wrogStonka.getPozycjaY();
+            string kierunek = wrogStonka.getKierunek();
+
+            if ((sprawdzaniePrzeszkody(wrogStonka, 1, 0) == true || pozycjaX == 9) && kierunek == "prawo") //zmiana kierunku w lewo
+            {
+                wrogStonka.zmianaKierunku("lewo");
+            }
+
+            if ((sprawdzaniePrzeszkody(wrogStonka, -1, 0) == true || pozycjaX == 0) && kierunek == "lewo") //zmiana kierunku w prawo
+            {
+                wrogStonka.zmianaKierunku("prawo");
+            }
+
+
+            if (wrogStonka.getKierunek() == "prawo")
+            {
+                przesunZdjecie(wrogStonka, pozycjaX, pozycjaY, "prawo", "/resource/stonka.png");
+            }
+            else
+            {
+                przesunZdjecie(wrogStonka, pozycjaX, pozycjaY, "lewo", "/resource/stonka.png");
+            }
+            sprawdzObrazenia(gracz, wrogStonka);
+            sprawdzObrazenia(gracz, wrogChwast);
+        }
 
         public void krecikPoruszanie()
         {
@@ -368,7 +368,7 @@ namespace ogrodnikRPG.strony
             {
                 przesunZdjecie(wrogKrecik, krecikX, krecikY, "prawo", "/resource/krecik.png");
             }
-            sprawdzPrzegrana(gracz, wrogKrecik);
+            sprawdzObrazenia(gracz, wrogKrecik);
         }
 
 
@@ -454,19 +454,64 @@ namespace ogrodnikRPG.strony
             }
         }
 
-        internal void sprawdzPrzegrana(Gracz gracz, Wrog wrog)
+
+        internal void sprawdzObrazenia(Gracz gracz, Wrog wrog)
         {
-            if(gracz.getHp() <= 0)
+            int HpGracza = gracz.getHp();
+            int graczX = gracz.getPozycjaX();
+            int graczY = gracz.getPozycjaY();
+
+            int wrogObraznienia = wrog.getObrazenia();
+            int wrogX = wrog.getPozycjaX();
+            int wrogY = wrog.getPozycjaY();
+
+            for (int i = graczX - 1; i < graczX + 2; i++)
             {
+                for (int j = graczY - 1; j < graczY + 2; j++)
+                {
+                    if (i == wrogX && j == wrogY)
+                    {
+                        MessageBox.Show("Otrzymałeś obrażenia!");
+                        gracz.zmniejszHp(wrogObraznienia);
+                    }
+                }
+            }
+
+            if(HpGracza < 100 && HpGracza > 75)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp4.png", UriKind.Relative));
+            }
+            else if(HpGracza == 75)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp75.png", UriKind.Relative));
+            }
+            else if(HpGracza < 75 && HpGracza > 50)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp3.png", UriKind.Relative));
+            }
+            else if(HpGracza == 50)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp50.png", UriKind.Relative));
+            }
+            else if(HpGracza < 50 && HpGracza > 25)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp2.png", UriKind.Relative));
+            }
+            else if(HpGracza == 25)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp25.png", UriKind.Relative));
+            }
+            else if(HpGracza < 25 && HpGracza > 0)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp1.png", UriKind.Relative));
+            }
+            else if(HpGracza <= 0)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp0.png", UriKind.Relative));
                 MessageBox.Show("Przegrałeś!");
                 NavigationService.Navigate(new Uri("strony/menuGlowne.xaml", UriKind.Relative));
             }
 
-            if(gracz.getPozycjaX() == wrog.getPozycjaX() && gracz.getPozycjaY() == wrog.getPozycjaY())
-            {
-                MessageBox.Show("Przegrałeś!");
-                NavigationService.Navigate(new Uri("strony/menuGlowne.xaml", UriKind.Relative));
-            }
         }
 
 

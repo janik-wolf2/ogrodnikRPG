@@ -46,7 +46,7 @@
 
 
                     <Label Content="HP:" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="14,23,193,613"></Label>
-                    <Image Source="/resource/hp100.png" Margin="93,30,10,620"></Image>
+                    <Image x:Name="wskaznikHp" Source="/resource/hp100.png" Margin="93,30,10,620"></Image>
 
                     <Label Content="Ekwipunek" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="65,165,42,440"></Label>
 

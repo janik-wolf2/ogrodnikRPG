@@ -19,6 +19,11 @@ namespace ogrodnikRPG.klasy
             pozycjaY = startY;
         }
 
+        public int getObrazenia()
+        {
+            return obrazenia;
+        }
+
         public void zmniejszHp(int ilosc)
         {
             hp -= ilosc;

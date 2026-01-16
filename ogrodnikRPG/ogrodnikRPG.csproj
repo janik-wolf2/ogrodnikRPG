@@ -10,8 +10,13 @@
 
   <ItemGroup>
     <None Remove="resource\chwast.png" />
+    <None Remove="resource\hp0.png" />
+    <None Remove="resource\hp1.png" />
     <None Remove="resource\hp100.png" />
+    <None Remove="resource\hp2.png" />
     <None Remove="resource\hp25.png" />
+    <None Remove="resource\hp3.png" />
+    <None Remove="resource\hp4.png" />
     <None Remove="resource\hp50.png" />
     <None Remove="resource\hp75.png" />
     <None Remove="resource\kamien.png" />
@@ -38,10 +43,25 @@
     <Resource Include="resource\chwast.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resource\hp0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\hp1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="resource\hp100.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resource\hp2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="resource\hp25.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\hp3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\hp4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\hp50.png">
