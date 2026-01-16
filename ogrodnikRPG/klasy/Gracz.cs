@@ -11,7 +11,7 @@ namespace ogrodnikRPG.klasy
         private int hp = 100;
         private int tura = 0;
         private int zebraneKwiatki = 0;
-        private int przedmioty = 0;
+        private List<Przedmiot> ekwipunek = new List<Przedmiot>();
 
         public Gracz()
         {
@@ -46,6 +46,16 @@ namespace ogrodnikRPG.klasy
         public void zmniejszHp(int ilosc)
         {
             hp -= ilosc;
+        }
+
+        public List<Przedmiot> getEkwipunek()
+        {
+            return ekwipunek;
+        }
+
+        public void dodajDoEkwipunku(Przedmiot p)
+        {
+            ekwipunek.Add(p);
         }
     }
 }

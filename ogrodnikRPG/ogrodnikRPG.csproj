@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="resource\chwast.png" />
+    <None Remove="resource\dynamit.png" />
     <None Remove="resource\hp0.png" />
     <None Remove="resource\hp1.png" />
     <None Remove="resource\hp100.png" />
@@ -26,12 +27,16 @@
     <None Remove="resource\kwiatek2.png" />
     <None Remove="resource\kwiatek3.png" />
     <None Remove="resource\lopata.png" />
+    <None Remove="resource\malaLopatka.png" />
+    <None Remove="resource\miksturaLeczenia.png" />
+    <None Remove="resource\miksturaNiewidzialonsci.png" />
     <None Remove="resource\ninja.png" />
     <None Remove="resource\ninja2.png" />
     <None Remove="resource\ogrodnik.png" />
     <None Remove="resource\sekator.png" />
     <None Remove="resource\spray.png" />
     <None Remove="resource\stonka.png" />
+    <None Remove="resource\tarcza.png" />
     <None Remove="resource\tloPomoc.png" />
     <None Remove="resource\tloPrzeciwnicy.png" />
     <None Remove="resource\tloZasady.jpg" />
@@ -41,6 +46,9 @@
 
   <ItemGroup>
     <Resource Include="resource\chwast.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\dynamit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\hp0.png">
@@ -89,6 +97,15 @@
     <Resource Include="resource\lopata.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resource\malaLopatka.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\miksturaLeczenia.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\miksturaNiewidzialonsci.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="resource\ninja.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -105,6 +122,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\stonka.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\tarcza.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\tloPomoc.png">

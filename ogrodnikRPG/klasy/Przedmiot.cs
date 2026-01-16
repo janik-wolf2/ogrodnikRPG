@@ -6,21 +6,20 @@ using System.Threading.Tasks;
 
 namespace ogrodnikRPG.klasy
 {
-    internal class Kwiatek : ObiektGry
+    internal class Przedmiot : ObiektGry
     {
-        private int typ;
+        private string nazwa;
 
-        public Kwiatek(int t, int x, int y)
+        public Przedmiot(string n, int x, int y)
         {
-            typ = t;
+            nazwa = n;
             pozycjaX = x;
             pozycjaY = y;
         }
 
-        public int getTyp()
+        public string getNazwa()
         {
-            return typ;
+            return nazwa;
         }
-
     }
 }
