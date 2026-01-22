@@ -8,11 +8,13 @@ namespace ogrodnikRPG.klasy
 {
     internal class Wrog : ObiektGry
     {
+        protected string nazwa;
         protected int hp;
         protected int obrazenia;
 
-        public Wrog(int startHp, int startObr, int startX, int startY)
+        public Wrog(string n, int startHp, int startObr, int startX, int startY)
         {
+            nazwa = n;
             hp = startHp;
             obrazenia = startObr;
             pozycjaX = startX;
@@ -29,6 +31,10 @@ namespace ogrodnikRPG.klasy
             hp -= ilosc;
         }
 
+        public string getNazwa()
+        {
+            return nazwa;
+        }
 
 
 

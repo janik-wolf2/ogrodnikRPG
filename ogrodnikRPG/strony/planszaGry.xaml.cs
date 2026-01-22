@@ -44,6 +44,7 @@ namespace ogrodnikRPG.strony
         List<Wrog> wrogowie = new List<Wrog>();
         List<Kwiatek> kwiatki = new List<Kwiatek>();
         List<Przedmiot> przedmioty = new List<Przedmiot>();
+        bool blokadaKlawiatury = false; //blokada podczas animacji
 
         public void generujPlansze(int szerokosc, int wysokosc)
         {
@@ -71,8 +72,10 @@ namespace ogrodnikRPG.strony
                     Image img = new Image()
                     {
                         Tag = (c, r),
-                        Stretch = Stretch.Fill
+                        Stretch = Stretch.Fill,
+                        
                     };
+                    img.MouseLeftButtonDown += czyMoznaAtakowac;
 
                     Border border = new Border()
                     {
@@ -84,6 +87,7 @@ namespace ogrodnikRPG.strony
 
                     Grid.SetRow(border, r);
                     Grid.SetColumn(border, c);
+                    
 
                     siatka.Children.Add(border);
                     polaPlanszy.Add(img);
@@ -107,15 +111,15 @@ namespace ogrodnikRPG.strony
             {
                 case "chwast":
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/chwast.png", UriKind.Relative));
-                    wrogowie.Add(new Wrog(20, 10, x, y));
+                    wrogowie.Add(new Wrog("chwast", 20, 10, x, y));
                     break;
                 case "stonka":
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/stonka.png", UriKind.Relative));
-                    wrogowie.Add(new Stonka(50, 15, "prawo", x, y));
+                    wrogowie.Add(new Stonka("stonka", 50, 15, "prawo", x, y));
                     break;
                 case "krecik":
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/krecik.png", UriKind.Relative));
-                    wrogowie.Add(new Krecik(60, 25, x, y));
+                    wrogowie.Add(new Krecik("krecik", 60, 25, x, y));
                     break;
             }
         }
@@ -150,15 +154,15 @@ namespace ogrodnikRPG.strony
             switch (typ)
             {
                 case "lopata":
-                    przedmioty.Add(new Przedmiot("lopata", x, y));
+                    przedmioty.Add(new Przedmiot("lopata", 20, x, y));
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/lopata.png", UriKind.Relative));
                     break;
                 case "malaLopatka":
-                    przedmioty.Add(new Przedmiot("malaLopatka", x, y));
+                    przedmioty.Add(new Przedmiot("malaLopatka", 10, x, y));
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/malaLopatka.png", UriKind.Relative));
                     break;
                 case "sekator":
-                    przedmioty.Add(new Przedmiot("sekator", x, y));
+                    przedmioty.Add(new Przedmiot("sekator", 15, x, y));
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/sekator.png", UriKind.Relative));
                     break;
             }
@@ -545,7 +549,7 @@ namespace ogrodnikRPG.strony
             }
         }
 
-        public void aktualizujPrzedmioty()
+        public void aktualizujPrzedmioty() //funkcja pobiera ekwipunek i wypelnia image przedmiotami, jesli przedmiot jest aktywny to jest on na zielonym tle
         {
             List<Przedmiot> ekwipunek = gracz.getEkwipunek();
             int aktywnyPrzedmiot = gracz.getAktywnyPrzedmiot();
@@ -626,7 +630,7 @@ namespace ogrodnikRPG.strony
         }
 
 
-        internal void sprawdzObrazenia(Gracz gracz, Wrog wrog) //funckja sprawdza czy na okolo gracz jest wrog, jesli tak to odejmuje hp
+        internal async Task sprawdzObrazenia(Gracz gracz, Wrog wrog) //funckja sprawdza czy na okolo gracz jest wrog, jesli tak to odejmuje hp
         {
             int HpGracza = gracz.getHp();
             int graczX = gracz.getPozycjaX();
@@ -636,6 +640,18 @@ namespace ogrodnikRPG.strony
             int wrogX = wrog.getPozycjaX();
             int wrogY = wrog.getPozycjaY();
 
+            Image zdjecieZgraczem = null;
+
+            foreach (var pole in plansza1.getPolaPlanszy()) //szukanie pola na ktorym jest gracz zeby bylo wiadomo gdzie zrobic animacje obrazen
+            {
+                var (x, y) = ((int, int))pole.Tag;
+
+                if (graczX == x && graczY == y)
+                {
+                    zdjecieZgraczem = pole;
+                }
+            }
+
             for (int i = graczX - 1; i < graczX + 2; i++)
             {
                 for (int j = graczY - 1; j < graczY + 2; j++)
@@ -643,6 +659,13 @@ namespace ogrodnikRPG.strony
                     if (i == wrogX && j == wrogY)
                     {
                         gracz.zmniejszHp(wrogObraznienia);
+
+                        
+                        blokadaKlawiatury = true;
+                        zdjecieZgraczem.Source = new BitmapImage(new Uri("/resource/ninja2Obrazenia.png", UriKind.Relative));
+                        await Task.Delay(500);
+                        zdjecieZgraczem.Source = new BitmapImage(new Uri("/resource/ninja2.png", UriKind.Relative));
+                        blokadaKlawiatury = false;
                     }
                 }
             }
@@ -683,11 +706,101 @@ namespace ogrodnikRPG.strony
                 MessageBox.Show("Przegrałeś!");
                 NavigationService.Navigate(new Uri("strony/menuGlowne.xaml", UriKind.Relative));
             }
+        }
 
+        public async Task atakuj(Image pole, int x, int y)
+        {
+            List<Przedmiot> ekwipunek = gracz.getEkwipunek();
+
+            int aktywnyPrzedmiot = gracz.getAktywnyPrzedmiot();
+            int zadawaneObrazenia = ekwipunek[aktywnyPrzedmiot].getObrazenia();
+            string nazwaPrzedmiotu = ekwipunek[aktywnyPrzedmiot].getNazwa();
+
+            foreach (var wrog in wrogowie)
+            {
+                if(wrog.getPozycjaX() == x && wrog.getPozycjaY() == y) //znajdujemy wroga na ktorego kliknelismy
+                {
+                    wrog.zmniejszHp(zadawaneObrazenia);
+
+                    MessageBox.Show("zadano tyle obrazen:" + zadawaneObrazenia);
+                    pole.Source = new BitmapImage(new Uri("/resource/" + wrog.getNazwa() + "Obrazenia.png", UriKind.Relative));
+                    await Task.Delay(500);
+                    pole.Source = new BitmapImage(new Uri("/resource/" + wrog.getNazwa() + ".png", UriKind.Relative));
+                }
+            }
+            ruchyPrzeciwnikow();
+        }
+
+        public async void czyMoznaAtakowac(object sender, MouseButtonEventArgs e)
+        {
+            List<Przedmiot> ekwipunek = gracz.getEkwipunek();
+            bool czyPusty = !ekwipunek.Any();
+            if (czyPusty)
+            {
+                return;
+            }
+
+            int graczX = gracz.getPozycjaX();
+            int graczY = gracz.getPozycjaY();
+
+            Image pole = (Image)sender;
+            var (x, y) = ((int x, int y))pole.Tag;
+
+            bool wykrytoWroga = false;
+            
+            foreach(var wrog in wrogowie)
+            {
+                if(wrog.getPozycjaX() == x && wrog.getPozycjaY() == y)
+                {
+                    wykrytoWroga = true;
+                }
+            }
+
+            if (wykrytoWroga == false)
+            {
+                return;
+            }
+
+            for (int i = graczX - 2; i < graczX + 3; i++)
+            {
+                for (int j = graczY - 2; j < graczY + 3; j++)
+                {
+                    if (i == x && j == y)
+                    {
+                        await atakuj(pole, i, j);
+                    }
+                }
+            }
+        }
+
+        public void zmienKursor()
+        {
+            int graczX = gracz.getPozycjaX();
+            int graczY = gracz.getPozycjaY();
+            
+
+            foreach(var wrog in wrogowie)
+            {
+                int wrogX = wrog.getPozycjaX();
+                int wrogY = wrog.getPozycjaY();
+
+                for (int i = graczX - 2; i < graczX + 3; i++)
+                {
+                    for (int j = graczY - 2; j < graczY + 3; j++)
+                    {
+                        if (i == wrogX && j == wrogY)
+                        {
+                            
+                        }
+                    }
+                }
+            }
+
+            
         }
 
 
-        public void ruchyPrzeciwnikow()
+        public async void ruchyPrzeciwnikow()
         {
             gracz.zwiekszTure();
             wskaznikTury.Content = "Tura: " + gracz.getTura().ToString();
@@ -705,13 +818,15 @@ namespace ogrodnikRPG.strony
                 }
                 else
                 {
-                    sprawdzObrazenia(gracz, wrog);
+                    await sprawdzObrazenia(gracz, wrog);
                 }
             }
         }
 
         private void Page_KeyUp(object sender, KeyEventArgs e)
         {
+            if (blokadaKlawiatury) return;
+
             switch (e.Key)
             {
                 case Key.W:

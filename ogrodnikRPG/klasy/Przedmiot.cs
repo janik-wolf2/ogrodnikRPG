@@ -9,10 +9,12 @@ namespace ogrodnikRPG.klasy
     internal class Przedmiot : ObiektGry
     {
         private string nazwa;
+        private int obrazenia;
 
-        public Przedmiot(string n, int x, int y)
+        public Przedmiot(string n, int obr, int x, int y)
         {
             nazwa = n;
+            obrazenia = obr;
             pozycjaX = x;
             pozycjaY = y;
         }
@@ -20,6 +22,11 @@ namespace ogrodnikRPG.klasy
         public string getNazwa()
         {
             return nazwa;
+        }
+
+        public int getObrazenia()
+        {
+            return obrazenia;
         }
     }
 }

@@ -10,8 +10,8 @@ namespace ogrodnikRPG.klasy
     {
         private string kierunek;
 
-        public Stonka(int startHp, int startObr, string kier, int startX, int startY)
-        : base(startHp, startObr, startX, startY)
+        public Stonka(string nazwa, int startHp, int startObr, string kier, int startX, int startY)
+        : base(nazwa, startHp, startObr, startX, startY)
         {
             kierunek = kier;
         }

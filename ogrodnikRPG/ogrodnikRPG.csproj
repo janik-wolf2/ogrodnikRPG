@@ -41,6 +41,7 @@
     <None Remove="resource\miksturaNiewidzialonsci.png" />
     <None Remove="resource\ninja.png" />
     <None Remove="resource\ninja2.png" />
+    <None Remove="resource\ninja2Obrazenia.png" />
     <None Remove="resource\ogrodnik.png" />
     <None Remove="resource\sekator.png" />
     <None Remove="resource\spray.png" />
@@ -83,6 +84,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\krecikObrazenia.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\ninja2Obrazenia.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\przedmioty\dynamit.png">

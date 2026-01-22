@@ -8,8 +8,8 @@ namespace ogrodnikRPG.klasy
 {
     internal class Krecik : Wrog
     {
-        public Krecik(int startHp, int startObr, int startX, int startY)
-            : base(startHp, startObr, startX, startY)
+        public Krecik(string nazwa, int startHp, int startObr, int startX, int startY)
+            : base(nazwa, startHp, startObr, startX, startY)
         {
             hp = startHp;
             obrazenia = startObr;
