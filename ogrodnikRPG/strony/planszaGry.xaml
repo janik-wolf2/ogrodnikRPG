@@ -52,22 +52,22 @@
 
 
                     <Border BorderBrush="White" BorderThickness="5px" Margin="10,250,229,350" Height="100px" Width="100px">
-                        <Image Stretch="Uniform"/>
+                        <Image x:Name="przedmiot0" Stretch="Uniform"/>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="5px" Margin="120,250,119,350" Height="100px" Width="100px">
-                        <Image Stretch="Uniform"/>
+                        <Image x:Name="przedmiot1" Stretch="Uniform"/>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="5px" Margin="229,250,10,350" Height="100px" Width="100px">
-                        <Image Stretch="Uniform"/>
+                        <Image x:Name="przedmiot2" Stretch="Uniform"/>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="5px" Margin="10,361,229,239" Height="100px" Width="100px">
-                        <Image Stretch="Uniform"/>
+                        <Image x:Name="przedmiot3" Stretch="Uniform"/>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="5px" Margin="120,361,119,239" Height="100px" Width="100px">
-                        <Image Stretch="Uniform"/>
+                        <Image x:Name="przedmiot4" Stretch="Uniform"/>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="5px" Margin="229,361,10,239" Height="100px" Width="100px">
-                        <Image Stretch="Uniform"/>
+                        <Image x:Name="przedmiot5" Stretch="Uniform"/>
                     </Border>
 
                     <Label Content="Wrogowie: 0" FontSize="32pt" FontFamily="Baloo" Foreground="White" Margin="53,485,30,120"></Label>

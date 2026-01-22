@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resource\aktywnePrzedmioty\dynamitAktywny.png" />
+    <None Remove="resource\aktywnePrzedmioty\lopataAktywny.png" />
+    <None Remove="resource\aktywnePrzedmioty\malaLopatkaAktywny.png" />
+    <None Remove="resource\aktywnePrzedmioty\miksturaLeczeniaAktywny.png" />
+    <None Remove="resource\aktywnePrzedmioty\miksturaNiewidzialonsciAktywny.png" />
+    <None Remove="resource\aktywnePrzedmioty\sekatorAktywny.png" />
+    <None Remove="resource\aktywnePrzedmioty\sprayAktywny.png" />
     <None Remove="resource\chwast.png" />
+    <None Remove="resource\chwastObrazenia.png" />
     <None Remove="resource\dynamit.png" />
     <None Remove="resource\hp0.png" />
     <None Remove="resource\hp1.png" />
@@ -23,6 +31,7 @@
     <None Remove="resource\kamien.png" />
     <None Remove="resource\king-von-piracy.gif" />
     <None Remove="resource\krecik.png" />
+    <None Remove="resource\krecikObrazenia.png" />
     <None Remove="resource\kwiatek.png" />
     <None Remove="resource\kwiatek2.png" />
     <None Remove="resource\kwiatek3.png" />
@@ -36,6 +45,7 @@
     <None Remove="resource\sekator.png" />
     <None Remove="resource\spray.png" />
     <None Remove="resource\stonka.png" />
+    <None Remove="resource\stonkaObrazenia.png" />
     <None Remove="resource\tarcza.png" />
     <None Remove="resource\tloPomoc.png" />
     <None Remove="resource\tloPrzeciwnicy.png" />
@@ -45,10 +55,37 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="resource\aktywnePrzedmioty\dynamitAktywny.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\aktywnePrzedmioty\lopataAktywny.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\aktywnePrzedmioty\malaLopatkaAktywny.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\aktywnePrzedmioty\miksturaLeczeniaAktywny.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\aktywnePrzedmioty\miksturaNiewidzialonsciAktywny.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\aktywnePrzedmioty\sekatorAktywny.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\aktywnePrzedmioty\sprayAktywny.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="resource\chwast.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\dynamit.png">
+    <Resource Include="resource\chwastObrazenia.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\krecikObrazenia.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\przedmioty\dynamit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\hp0.png">
@@ -94,16 +131,16 @@
     <Resource Include="resource\kwiatek3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\lopata.png">
+    <Resource Include="resource\przedmioty\lopata.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\malaLopatka.png">
+    <Resource Include="resource\przedmioty\malaLopatka.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\miksturaLeczenia.png">
+    <Resource Include="resource\przedmioty\miksturaLeczenia.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\miksturaNiewidzialonsci.png">
+    <Resource Include="resource\przedmioty\miksturaNiewidzialonsci.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\ninja.png">
@@ -115,16 +152,19 @@
     <Resource Include="resource\ogrodnik.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\sekator.png">
+    <Resource Include="resource\przedmioty\sekator.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\spray.png">
+    <Resource Include="resource\przedmioty\spray.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\stonka.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\tarcza.png">
+    <Resource Include="resource\przedmioty\tarcza.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\stonkaObrazenia.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\tloPomoc.png">

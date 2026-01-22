@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -150,15 +151,15 @@ namespace ogrodnikRPG.strony
             {
                 case "lopata":
                     przedmioty.Add(new Przedmiot("lopata", x, y));
-                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/lopata.png", UriKind.Relative));
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/lopata.png", UriKind.Relative));
                     break;
                 case "malaLopatka":
                     przedmioty.Add(new Przedmiot("malaLopatka", x, y));
-                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/malaLopatka.png", UriKind.Relative));
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/malaLopatka.png", UriKind.Relative));
                     break;
                 case "sekator":
                     przedmioty.Add(new Przedmiot("sekator", x, y));
-                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/sekator.png", UriKind.Relative));
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/sekator.png", UriKind.Relative));
                     break;
             }
         }
@@ -544,6 +545,85 @@ namespace ogrodnikRPG.strony
             }
         }
 
+        public void aktualizujPrzedmioty()
+        {
+            List<Przedmiot> ekwipunek = gracz.getEkwipunek();
+            int aktywnyPrzedmiot = gracz.getAktywnyPrzedmiot();
+
+            for (int i = 0; i < ekwipunek.Count; i++)
+            {
+                string nazwaPrzedmiotu = ekwipunek[i].getNazwa();
+                switch (i) 
+                {
+                    case 0:
+                        if(aktywnyPrzedmiot == 0)
+                        {
+                            przedmiot0.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
+                        }
+                        else
+                        {
+                            przedmiot0.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
+                        }
+                        break;
+
+                    case 1:
+                        if (aktywnyPrzedmiot == 1)
+                        {
+                            przedmiot1.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
+                        }
+                        else
+                        {
+                            przedmiot1.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
+                        }
+                        break;
+
+                    case 2:
+                        if (aktywnyPrzedmiot == 2)
+                        {
+                            przedmiot2.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
+                        }
+                        else
+                        {
+                            przedmiot2.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
+                        }
+                        break;
+
+                    case 3:
+                        if (aktywnyPrzedmiot == 3)
+                        {
+                            przedmiot3.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
+                        }
+                        else
+                        {
+                            przedmiot3.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
+                        }
+                        break;
+
+                    case 4:
+                        if (aktywnyPrzedmiot == 4)
+                        {
+                            przedmiot4.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
+                        }
+                        else
+                        {
+                            przedmiot4.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
+                        }
+                        break;
+
+                    case 5:
+                        if (aktywnyPrzedmiot == 5)
+                        {
+                            przedmiot5.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
+                        }
+                        else
+                        {
+                            przedmiot5.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
+                        }
+                        break;
+                }
+
+            }
+        }
 
 
         internal void sprawdzObrazenia(Gracz gracz, Wrog wrog) //funckja sprawdza czy na okolo gracz jest wrog, jesli tak to odejmuje hp
@@ -611,6 +691,7 @@ namespace ogrodnikRPG.strony
         {
             gracz.zwiekszTure();
             wskaznikTury.Content = "Tura: " + gracz.getTura().ToString();
+            aktualizujPrzedmioty();
 
             foreach(var wrog in wrogowie) //poruszanie sie wrogow chwast sie nie rusza 
             {
@@ -645,6 +726,29 @@ namespace ogrodnikRPG.strony
                 case Key.D:
                     idzPrawo(); break;
 
+                case Key.D1:
+                    gracz.setAktywnyPrzedmiot(0);
+                    aktualizujPrzedmioty(); break;
+
+                case Key.D2:
+                    gracz.setAktywnyPrzedmiot(1);
+                    aktualizujPrzedmioty(); break;
+
+                case Key.D3:
+                    gracz.setAktywnyPrzedmiot(2);
+                    aktualizujPrzedmioty(); break;
+
+                case Key.D4:
+                    gracz.setAktywnyPrzedmiot(3);
+                    aktualizujPrzedmioty(); break;
+
+                case Key.D5:
+                    gracz.setAktywnyPrzedmiot(4);
+                    aktualizujPrzedmioty(); break;
+
+                case Key.D6:
+                    gracz.setAktywnyPrzedmiot(5);
+                    aktualizujPrzedmioty(); break;
             }
         }
 

@@ -12,6 +12,7 @@ namespace ogrodnikRPG.klasy
         private int tura = 0;
         private int zebraneKwiatki = 0;
         private List<Przedmiot> ekwipunek = new List<Przedmiot>();
+        private int aktywnyPrzedmiot = 0;
 
         public Gracz()
         {
@@ -56,6 +57,16 @@ namespace ogrodnikRPG.klasy
         public void dodajDoEkwipunku(Przedmiot p)
         {
             ekwipunek.Add(p);
+        }
+
+        public int getAktywnyPrzedmiot()
+        {
+            return aktywnyPrzedmiot;
+        }
+
+        public void setAktywnyPrzedmiot(int x)
+        {
+            aktywnyPrzedmiot = x;
         }
     }
 }
