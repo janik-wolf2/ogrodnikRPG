@@ -144,7 +144,7 @@
     <Resource Include="resource\przedmioty\miksturaLeczenia.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\przedmioty\miksturaNiewidzialonsci.png">
+    <Resource Include="resource\przedmioty\miksturaNiewidzialnosci.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\ninja.png">

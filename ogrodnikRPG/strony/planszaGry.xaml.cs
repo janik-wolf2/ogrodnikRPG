@@ -38,6 +38,7 @@ namespace ogrodnikRPG.strony
             stworzKwiatka("kwiatek3");
             stworzPrzedmiot("malaLopatka");
             stworzPrzedmiot("lopata");
+            stworzPrzedmiot("miksturaNiewidzialnosci");
         }
         Gracz gracz = new Gracz();
         Plansza plansza1 = new Plansza(3, 3);
@@ -166,6 +167,18 @@ namespace ogrodnikRPG.strony
                 case "sekator":
                     przedmioty.Add(new Przedmiot("sekator", 15, x, y));
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/sekator.png", UriKind.Relative));
+                    break;
+                case "dynamit":
+                    przedmioty.Add(new Przedmiot("dynamit", 50, x, y));
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/dynamit.png", UriKind.Relative));
+                    break;
+                case "miksturaLeczenia":
+                    przedmioty.Add(new Przedmiot("miksturaLeczenia", 0, x, y));
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/miksturaLeczenia.png", UriKind.Relative));
+                    break;
+                case "miksturaNiewidzialnosci":
+                    przedmioty.Add(new Przedmiot("miksturaNiewidzialnosci", 0, x, y));
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/miksturaNiewidzialnosci.png", UriKind.Relative));
                     break;
             }
         }
@@ -401,7 +414,7 @@ namespace ogrodnikRPG.strony
             int graczX = gracz.getPozycjaX();
             int graczY = gracz.getPozycjaY();
 
-            if (graczX <= krecikX && graczY <= krecikY)
+            if (graczX < krecikX && graczY < krecikY)
             {
                 if (sprawdzaniePrzeszkody(wrogKrecik, 0, 1) == false && krecikY != 7)
                 {
@@ -411,9 +424,9 @@ namespace ogrodnikRPG.strony
                 {
                     przesunZdjecie(wrogKrecik, krecikX, krecikY, "prawo", "/resource/krecik.png");
                 }
-                
+              
             }
-            else if (graczX <= krecikX && graczY >= krecikY)
+            else if (graczX < krecikX && graczY > krecikY)
             {
                 if(sprawdzaniePrzeszkody(wrogKrecik, 1, 0) == false && krecikX != 7)
                 {
@@ -423,9 +436,9 @@ namespace ogrodnikRPG.strony
                 {
                     przesunZdjecie(wrogKrecik, krecikX, krecikY, "gora", "/resource/krecik.png");
                 }
-                
+              
             }
-            else if (graczY <= krecikY && graczX >= krecikX)
+            else if (graczY < krecikY && graczX > krecikX)
             {
                 if (sprawdzaniePrzeszkody(wrogKrecik, -1, 0) == false && krecikX != 0)
                 {
@@ -436,7 +449,7 @@ namespace ogrodnikRPG.strony
                     przesunZdjecie(wrogKrecik, krecikX, krecikY, "dol", "/resource/krecik.png");
                 }
             }
-            else if (graczY >= krecikY && graczX >= krecikX)
+            else if (graczY > krecikY && graczX > krecikX)
             {
                 if (sprawdzaniePrzeszkody(wrogKrecik, 0, -1) == false && krecikY != 0)
                 {
@@ -446,7 +459,7 @@ namespace ogrodnikRPG.strony
                 {
                     przesunZdjecie(wrogKrecik, krecikX, krecikY, "lewo", "/resource/krecik.png");
                 }
-                
+              
             }
         }
 
@@ -743,7 +756,7 @@ namespace ogrodnikRPG.strony
             {
                 if(wrog.getPozycjaX() == x && wrog.getPozycjaY() == y) //znajdujemy wroga na ktorego kliknelismy
                 {
-                    wrog.zmniejszHp(zadawaneObrazenia);
+                    //wrog.zmniejszHp(zadawaneObrazenia);
 
                     blokadaKlawiatury = true;
                     pole.Source = new BitmapImage(new Uri("/resource/" + wrog.getNazwa() + "Obrazenia.png", UriKind.Relative));
@@ -763,7 +776,7 @@ namespace ogrodnikRPG.strony
         {
             List<Przedmiot> ekwipunek = gracz.getEkwipunek();
 
-            if (ekwipunek.Count == 0)
+            if (ekwipunek.Count == 0 || blokadaKlawiatury == true)
             {
                 return;
             }
