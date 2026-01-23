@@ -29,13 +29,15 @@ namespace ogrodnikRPG.strony
             generujPlansze(10, 8);
             stworzPostac();
             stworzWroga("chwast");
+            stworzWroga("chwast");
+            stworzWroga("chwast");
             stworzWroga("stonka");
             stworzWroga("krecik");
             stworzKwiatka("kwiatek1");
             stworzKwiatka("kwiatek2");
             stworzKwiatka("kwiatek3");
-            stworzPrzedmiot("lopata");
             stworzPrzedmiot("malaLopatka");
+            stworzPrzedmiot("lopata");
         }
         Gracz gracz = new Gracz();
         Plansza plansza1 = new Plansza(3, 3);
@@ -336,7 +338,7 @@ namespace ogrodnikRPG.strony
             }
 
         }
-        internal void stonkaPoruszanie(Stonka wrogStonka)
+        internal async void stonkaPoruszanie(Stonka wrogStonka)
         {
             int pozycjaX = wrogStonka.getPozycjaX();
             int pozycjaY = wrogStonka.getPozycjaY();
@@ -361,10 +363,10 @@ namespace ogrodnikRPG.strony
             {
                 przesunZdjecie(wrogStonka, pozycjaX, pozycjaY, "lewo", "/resource/stonka.png");
             }
-            sprawdzObrazenia(gracz, wrogStonka);
+            await sprawdzObrazenia(gracz, wrogStonka);
         }
 
-        internal void krecikPoruszanie(Wrog wrogKrecik)
+        internal async void krecikPoruszanie(Wrog wrogKrecik)
         {
             int krecikX = wrogKrecik.getPozycjaX();
             int krecikY = wrogKrecik.getPozycjaY();
@@ -388,7 +390,64 @@ namespace ogrodnikRPG.strony
             {
                 przesunZdjecie(wrogKrecik, krecikX, krecikY, "prawo", "/resource/krecik.png");
             }
-            sprawdzObrazenia(gracz, wrogKrecik);
+            await sprawdzObrazenia(gracz, wrogKrecik);
+        }
+
+        internal void krecikUcieczka(Wrog wrogKrecik)
+        {
+            int krecikX = wrogKrecik.getPozycjaX();
+            int krecikY = wrogKrecik.getPozycjaY();
+
+            int graczX = gracz.getPozycjaX();
+            int graczY = gracz.getPozycjaY();
+
+            if (graczX <= krecikX && graczY <= krecikY)
+            {
+                if (sprawdzaniePrzeszkody(wrogKrecik, 0, 1) == false && krecikY != 7)
+                {
+                    przesunZdjecie(wrogKrecik, krecikX, krecikY, "dol", "/resource/krecik.png");
+                }
+                else if(sprawdzaniePrzeszkody(wrogKrecik, 1, 0) == false && krecikX != 7)
+                {
+                    przesunZdjecie(wrogKrecik, krecikX, krecikY, "prawo", "/resource/krecik.png");
+                }
+                
+            }
+            else if (graczX <= krecikX && graczY >= krecikY)
+            {
+                if(sprawdzaniePrzeszkody(wrogKrecik, 1, 0) == false && krecikX != 7)
+                {
+                    przesunZdjecie(wrogKrecik, krecikX, krecikY, "prawo", "/resource/krecik.png");
+                }
+                else if(sprawdzaniePrzeszkody(wrogKrecik, 0, -1) == false && krecikY != 0)
+                {
+                    przesunZdjecie(wrogKrecik, krecikX, krecikY, "gora", "/resource/krecik.png");
+                }
+                
+            }
+            else if (graczY <= krecikY && graczX >= krecikX)
+            {
+                if (sprawdzaniePrzeszkody(wrogKrecik, -1, 0) == false && krecikX != 0)
+                {
+                    przesunZdjecie(wrogKrecik, krecikX, krecikY, "lewo", "/resource/krecik.png");
+                }
+                else if(sprawdzaniePrzeszkody(wrogKrecik, 0, 1) == false && krecikY != 7)
+                {
+                    przesunZdjecie(wrogKrecik, krecikX, krecikY, "dol", "/resource/krecik.png");
+                }
+            }
+            else if (graczY >= krecikY && graczX >= krecikX)
+            {
+                if (sprawdzaniePrzeszkody(wrogKrecik, 0, -1) == false && krecikY != 0)
+                {
+                    przesunZdjecie(wrogKrecik, krecikX, krecikY, "gora", "/resource/krecik.png");
+                }
+                else if(sprawdzaniePrzeszkody(wrogKrecik, -1, 0) == false && krecikX != 0)
+                {
+                    przesunZdjecie(wrogKrecik, krecikX, krecikY, "lewo", "/resource/krecik.png");
+                }
+                
+            }
         }
 
 
@@ -530,7 +589,6 @@ namespace ogrodnikRPG.strony
             {
                 if(przedmiot.getPozycjaX() == x && przedmiot.getPozycjaY() == y)
                 {
-                    //MessageBox.Show("Podniosłeś przedmiot: " + przedmiot.getNazwa());
                     gracz.dodajDoEkwipunku(przedmiot);
                     usunPrzedmiot(przedmiot.getNazwa());
                 }
@@ -554,78 +612,32 @@ namespace ogrodnikRPG.strony
             List<Przedmiot> ekwipunek = gracz.getEkwipunek();
             int aktywnyPrzedmiot = gracz.getAktywnyPrzedmiot();
 
-            for (int i = 0; i < ekwipunek.Count; i++)
+            if(ekwipunek.Count == 0)
             {
-                string nazwaPrzedmiotu = ekwipunek[i].getNazwa();
-                switch (i) 
+                przedmiot0.Source = null;
+                return;
+            }
+
+            Image[] pola = { przedmiot0, przedmiot1, przedmiot2, przedmiot3, przedmiot4, przedmiot5 };
+
+            for (int i = 0; i < pola.Length; i++) //szybki reset zeby sie zamienilo jak sie usunie przedmiot
+            {
+                pola[i].Source = null;
+            }
+
+
+            for(int j = 0;  j < ekwipunek.Count; j++)
+            {
+                string nazwaPrzedmiotu = ekwipunek[j].getNazwa();
+
+                if (aktywnyPrzedmiot == j)
                 {
-                    case 0:
-                        if(aktywnyPrzedmiot == 0)
-                        {
-                            przedmiot0.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
-                        }
-                        else
-                        {
-                            przedmiot0.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
-                        }
-                        break;
-
-                    case 1:
-                        if (aktywnyPrzedmiot == 1)
-                        {
-                            przedmiot1.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
-                        }
-                        else
-                        {
-                            przedmiot1.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
-                        }
-                        break;
-
-                    case 2:
-                        if (aktywnyPrzedmiot == 2)
-                        {
-                            przedmiot2.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
-                        }
-                        else
-                        {
-                            przedmiot2.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
-                        }
-                        break;
-
-                    case 3:
-                        if (aktywnyPrzedmiot == 3)
-                        {
-                            przedmiot3.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
-                        }
-                        else
-                        {
-                            przedmiot3.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
-                        }
-                        break;
-
-                    case 4:
-                        if (aktywnyPrzedmiot == 4)
-                        {
-                            przedmiot4.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
-                        }
-                        else
-                        {
-                            przedmiot4.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
-                        }
-                        break;
-
-                    case 5:
-                        if (aktywnyPrzedmiot == 5)
-                        {
-                            przedmiot5.Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
-                        }
-                        else
-                        {
-                            przedmiot5.Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
-                        }
-                        break;
+                    pola[j].Source = new BitmapImage(new Uri("/resource/aktywnePrzedmioty/" + nazwaPrzedmiotu + "Aktywny.png", UriKind.Relative));
                 }
-
+                else
+                {
+                    pola[j].Source = new BitmapImage(new Uri("/resource/przedmioty/" + nazwaPrzedmiotu + ".png", UriKind.Relative));
+                }
             }
         }
 
@@ -658,7 +670,7 @@ namespace ogrodnikRPG.strony
                 {
                     if (i == wrogX && j == wrogY)
                     {
-                        gracz.zmniejszHp(wrogObraznienia);
+                        //gracz.zmniejszHp(wrogObraznienia);
 
                         
                         blokadaKlawiatury = true;
@@ -669,8 +681,6 @@ namespace ogrodnikRPG.strony
                     }
                 }
             }
-
-            gracz.zmniejszHp(-100); //god mode xd
 
             if (HpGracza < 100 && HpGracza > 75)
             {
@@ -708,6 +718,19 @@ namespace ogrodnikRPG.strony
             }
         }
 
+        public void sprawdzObrazeniaWrogow()
+        {
+            foreach(var wrog in wrogowie)
+            {
+                if(wrog.getHp() <= 0)
+                {
+                    usunZdjecie(wrog.getPozycjaX(), wrog.getPozycjaY());
+                    wrog.setPozycjaX(-2);
+                    wrog.setPozycjaY(-2);
+                }
+            }
+        }
+
         public async Task atakuj(Image pole, int x, int y)
         {
             List<Przedmiot> ekwipunek = gracz.getEkwipunek();
@@ -722,10 +745,15 @@ namespace ogrodnikRPG.strony
                 {
                     wrog.zmniejszHp(zadawaneObrazenia);
 
-                    MessageBox.Show("zadano tyle obrazen:" + zadawaneObrazenia);
+                    blokadaKlawiatury = true;
                     pole.Source = new BitmapImage(new Uri("/resource/" + wrog.getNazwa() + "Obrazenia.png", UriKind.Relative));
                     await Task.Delay(500);
                     pole.Source = new BitmapImage(new Uri("/resource/" + wrog.getNazwa() + ".png", UriKind.Relative));
+                    blokadaKlawiatury = false;
+                    if (wrog.getNazwa() == "krecik")
+                    {
+                        krecikUcieczka(wrog);
+                    }
                 }
             }
             ruchyPrzeciwnikow();
@@ -734,8 +762,8 @@ namespace ogrodnikRPG.strony
         public async void czyMoznaAtakowac(object sender, MouseButtonEventArgs e)
         {
             List<Przedmiot> ekwipunek = gracz.getEkwipunek();
-            bool czyPusty = !ekwipunek.Any();
-            if (czyPusty)
+
+            if (ekwipunek.Count == 0)
             {
                 return;
             }
@@ -773,31 +801,30 @@ namespace ogrodnikRPG.strony
             }
         }
 
-        public void zmienKursor()
+        public void sprawdzWygrana()
         {
-            int graczX = gracz.getPozycjaX();
-            int graczY = gracz.getPozycjaY();
-            
-
-            foreach(var wrog in wrogowie)
+            foreach(var wrog in wrogowie) //czy pokonano wszystkich wrogow
             {
-                int wrogX = wrog.getPozycjaX();
-                int wrogY = wrog.getPozycjaY();
-
-                for (int i = graczX - 2; i < graczX + 3; i++)
+                if(wrog.getPozycjaX() != -2 && wrog.getPozycjaY() != -2)
                 {
-                    for (int j = graczY - 2; j < graczY + 3; j++)
-                    {
-                        if (i == wrogX && j == wrogY)
-                        {
-                            
-                        }
-                    }
+                    return;
                 }
+
             }
 
-            
+            foreach (var kwiatek in kwiatki) //czy zebrano wszystkie kwiatki
+            {
+                if (kwiatek.getPozycjaX() != -1 && kwiatek.getPozycjaY() != -1)
+                {
+                    return;
+                }
+
+            }
+
+            MessageBox.Show("Gratulacje wygrales gre");
+            przejdzNaKolejnaPlansze();
         }
+
 
 
         public async void ruchyPrzeciwnikow()
@@ -805,6 +832,8 @@ namespace ogrodnikRPG.strony
             gracz.zwiekszTure();
             wskaznikTury.Content = "Tura: " + gracz.getTura().ToString();
             aktualizujPrzedmioty();
+            sprawdzObrazeniaWrogow();
+            sprawdzWygrana();
 
             foreach(var wrog in wrogowie) //poruszanie sie wrogow chwast sie nie rusza 
             {
@@ -820,6 +849,53 @@ namespace ogrodnikRPG.strony
                 {
                     await sprawdzObrazenia(gracz, wrog);
                 }
+            }
+        }
+
+        public void przejdzNaKolejnaPlansze()
+        {
+            wyczyscWszystkiePola();
+
+            if(nrPlanszy.Content.ToString() == "Plansza 1")
+            {
+                nrPlanszy.Content = "Plansza 2";
+                plansza2Setup();
+            }
+            else
+            {
+                nrPlanszy.Content = "Plansza 3";
+                plansza3Setup();
+            }
+
+        }
+
+        public void plansza2Setup()
+        {
+            stworzPostac();
+            gracz.setPozycjaX(0);
+            gracz.setPozycjaY(0);
+
+            stworzWroga("chwast");
+            stworzWroga("chwast");
+            stworzWroga("chwast");
+        }
+
+        public void plansza3Setup()
+        {
+            stworzPostac();
+            gracz.setPozycjaX(0);
+            gracz.setPozycjaY(0);
+
+            stworzWroga("chwast");
+        }
+
+        public void wyczyscWszystkiePola()
+        {
+            List<Image> plansza = plansza1.getPolaPlanszy();
+
+            foreach (var pole in plansza)
+            {
+                pole.Source = null;
             }
         }
 
@@ -864,6 +940,15 @@ namespace ogrodnikRPG.strony
                 case Key.D6:
                     gracz.setAktywnyPrzedmiot(5);
                     aktualizujPrzedmioty(); break;
+
+                case Key.P:
+                    List<Przedmiot> ekwipunek = gracz.getEkwipunek();
+                    if (ekwipunek.Count != 0)
+                    {
+                        ekwipunek.RemoveAt(gracz.getAktywnyPrzedmiot());
+                        aktualizujPrzedmioty();
+                    }  
+                    break;
             }
         }
 

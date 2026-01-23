@@ -25,8 +25,8 @@
                 <Button Cursor="Hand" Content="Jak grać?" Click="showJakGrac" FontSize="30" FontFamily="Baloo" Background="Green" Foreground="White" BorderBrush="White" BorderThickness="8" Margin="975,51,24,568"/>
 
                 <TextBlock Text="W/A/S/D - Poruszanie się" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,200,149,442"/>
-                <TextBlock Text="E - Użyj przedmiotu" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,272,149,370"/>
-                <TextBlock Text="Q - Upuść przedmiot" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,344,149,298"/>
+                <TextBlock Text="LPM - Użyj przedmiotu" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,272,149,370"/>
+                <TextBlock Text="P - Usuń przedmiot" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,344,149,298"/>
                 <TextBlock Text="1/2/3/4/5/6 - Wybierz przedmiot" FontFamily="Baloo" FontSize="46" Foreground="White" Margin="40,416,149,226"/>
 
                 <Image Source="/resource/spray.png" Margin="116,480,871,35"></Image>

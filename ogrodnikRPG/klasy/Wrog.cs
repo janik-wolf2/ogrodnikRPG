@@ -26,6 +26,11 @@ namespace ogrodnikRPG.klasy
             return obrazenia;
         }
 
+        public int getHp()
+        {
+            return hp;
+        }
+
         public void zmniejszHp(int ilosc)
         {
             hp -= ilosc;
