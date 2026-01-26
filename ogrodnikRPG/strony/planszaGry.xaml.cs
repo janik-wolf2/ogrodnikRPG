@@ -30,15 +30,12 @@ namespace ogrodnikRPG.strony
             stworzPostac();
             stworzWroga("chwast");
             stworzWroga("chwast");
-            stworzWroga("chwast");
             stworzWroga("stonka");
             stworzWroga("krecik");
             stworzKwiatka("kwiatek1");
             stworzKwiatka("kwiatek2");
             stworzKwiatka("kwiatek3");
             stworzPrzedmiot("malaLopatka");
-            stworzPrzedmiot("lopata");
-            stworzPrzedmiot("miksturaNiewidzialnosci");
         }
         Gracz gracz = new Gracz();
         Plansza plansza1 = new Plansza(3, 3);
@@ -157,7 +154,7 @@ namespace ogrodnikRPG.strony
             switch (typ)
             {
                 case "lopata":
-                    przedmioty.Add(new Przedmiot("lopata", 20, x, y));
+                    przedmioty.Add(new Przedmiot("lopata", 15, x, y));
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/lopata.png", UriKind.Relative));
                     break;
                 case "malaLopatka":
@@ -165,7 +162,11 @@ namespace ogrodnikRPG.strony
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/malaLopatka.png", UriKind.Relative));
                     break;
                 case "sekator":
-                    przedmioty.Add(new Przedmiot("sekator", 15, x, y));
+                    przedmioty.Add(new Przedmiot("sekator", 20, x, y));
+                    losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/sekator.png", UriKind.Relative));
+                    break;
+                case "spray":
+                    przedmioty.Add(new Przedmiot("sekator", 12, x, y));
                     losoweWolnePole.Source = new BitmapImage(new Uri("/resource/przedmioty/sekator.png", UriKind.Relative));
                     break;
                 case "dynamit":
@@ -210,8 +211,15 @@ namespace ogrodnikRPG.strony
                 return;
             }
 
+            if(gracz.getNiewidzialnosc() == true)
+            {
+                przesunZdjecie(gracz, pozycjaX, pozycjaY, "gora", "/resource/ninja2Niewidzialny.png");
+            }
+            else
+            {
+                przesunZdjecie(gracz, pozycjaX, pozycjaY, "gora", "/resource/ninja2.png");
+            }
 
-            przesunZdjecie(gracz, pozycjaX, pozycjaY, "gora", "/resource/ninja2.png");
 
             ruchyPrzeciwnikow();
         }
@@ -226,7 +234,14 @@ namespace ogrodnikRPG.strony
                 return;
             }
 
-            przesunZdjecie(gracz, pozycjaX, pozycjaY, "dol", "/resource/ninja2.png");
+            if (gracz.getNiewidzialnosc() == true)
+            {
+                przesunZdjecie(gracz, pozycjaX, pozycjaY, "dol", "/resource/ninja2Niewidzialny.png");
+            }
+            else
+            {
+                przesunZdjecie(gracz, pozycjaX, pozycjaY, "dol", "/resource/ninja2.png");
+            }
 
             ruchyPrzeciwnikow();
         }
@@ -241,7 +256,14 @@ namespace ogrodnikRPG.strony
                 return;
             }
 
-            przesunZdjecie(gracz, pozycjaX, pozycjaY, "lewo", "/resource/ninja2.png");
+            if (gracz.getNiewidzialnosc() == true)
+            {
+                przesunZdjecie(gracz, pozycjaX, pozycjaY, "lewo", "/resource/ninja2Niewidzialny.png");
+            }
+            else
+            {
+                przesunZdjecie(gracz, pozycjaX, pozycjaY, "lewo", "/resource/ninja2.png");
+            }
 
             ruchyPrzeciwnikow();
         }
@@ -255,8 +277,15 @@ namespace ogrodnikRPG.strony
             {
                 return;
             }
-       
-            przesunZdjecie(gracz, pozycjaX, pozycjaY, "prawo", "/resource/ninja2.png");
+
+            if (gracz.getNiewidzialnosc() == true)
+            {
+                przesunZdjecie(gracz, pozycjaX, pozycjaY, "prawo", "/resource/ninja2Niewidzialny.png");
+            }
+            else
+            {
+                przesunZdjecie(gracz, pozycjaX, pozycjaY, "prawo", "/resource/ninja2.png");
+            }
 
             ruchyPrzeciwnikow();
         }
@@ -532,6 +561,9 @@ namespace ogrodnikRPG.strony
 
         public void zbierzKwiatka(Image pole) //ta funckja sprawdza czy pole na ktore wchodzisz jest kwiatkiem, jesli tak to go zbiera
         {
+            string kwiatkiString = wskaznikKwiatkow.Content.ToString();
+            char ileWszystkich = kwiatkiString[kwiatkiString.Length - 1];
+
             if (pole.Source is BitmapImage bmp && bmp.UriSource != null)
             {
                 string uri = bmp.UriSource.ToString();
@@ -539,19 +571,19 @@ namespace ogrodnikRPG.strony
                 if(uri.Contains("kwiatek.png"))
                 {
                     gracz.zebranoKwiatek();
-                    wskaznikKwiatkow.Content = "Kwiatki: " + gracz.getZebraneKwiatki().ToString() + "/3";
+                    wskaznikKwiatkow.Content = "Kwiatki: " + gracz.getZebraneKwiatki().ToString() + "/" + ileWszystkich;
                     usunKwiatka(1);
                 }
                 else if(uri.Contains("kwiatek2.png"))
                 {
                     gracz.zebranoKwiatek();
-                    wskaznikKwiatkow.Content = "Kwiatki: " + gracz.getZebraneKwiatki().ToString() + "/3";
+                    wskaznikKwiatkow.Content = "Kwiatki: " + gracz.getZebraneKwiatki().ToString() + "/" + ileWszystkich;
                     usunKwiatka(2);
                 }
                 else if(uri.Contains("kwiatek3.png"))
                 {
                     gracz.zebranoKwiatek();
-                    wskaznikKwiatkow.Content = "Kwiatki: " + gracz.getZebraneKwiatki().ToString() + "/3";
+                    wskaznikKwiatkow.Content = "Kwiatki: " + gracz.getZebraneKwiatki().ToString() + "/" + ileWszystkich;
                     usunKwiatka(3);
                 }
             }
@@ -654,6 +686,43 @@ namespace ogrodnikRPG.strony
             }
         }
 
+        public void uzyjMikstrury()
+        {
+            List<Przedmiot> ekwipunek = gracz.getEkwipunek();
+            string aktywnyPrzedmiot = ekwipunek[gracz.getAktywnyPrzedmiot()].getNazwa();
+
+            if (aktywnyPrzedmiot == "miksturaLeczenia")
+            {
+                gracz.zmniejszHp(-50);
+
+                if(gracz.getHp() > 100)
+                {
+                    gracz.setHp(100);
+                }
+                aktualizujHp();
+            }
+            else if(aktywnyPrzedmiot == "miksturaNiewidzialnosci")
+            {
+                int graczX = gracz.getPozycjaX();
+                int graczY = gracz.getPozycjaY();
+                gracz.setNiewidzialnosc(true);
+                gracz.setTuryNiewidzialnosci(11);
+
+                foreach (var pole in plansza1.getPolaPlanszy()) //szukanie pola na ktorym jest gracz
+                {
+                    var (x, y) = ((int, int))pole.Tag;
+
+                    if (graczX == x && graczY == y)
+                    {
+                        pole.Source = new BitmapImage(new Uri("/resource/ninja2Niewidzialny.png", UriKind.Relative));
+                    }
+                }
+            }
+
+            ekwipunek.RemoveAt(gracz.getAktywnyPrzedmiot());
+            aktualizujPrzedmioty();
+        }
+
 
         internal async Task sprawdzObrazenia(Gracz gracz, Wrog wrog) //funckja sprawdza czy na okolo gracz jest wrog, jesli tak to odejmuje hp
         {
@@ -689,46 +758,20 @@ namespace ogrodnikRPG.strony
                         blokadaKlawiatury = true;
                         zdjecieZgraczem.Source = new BitmapImage(new Uri("/resource/ninja2Obrazenia.png", UriKind.Relative));
                         await Task.Delay(500);
-                        zdjecieZgraczem.Source = new BitmapImage(new Uri("/resource/ninja2.png", UriKind.Relative));
+                        if(gracz.getNiewidzialnosc() == false)
+                        {
+                            zdjecieZgraczem.Source = new BitmapImage(new Uri("/resource/ninja2.png", UriKind.Relative));
+                        }
+                        else
+                        {
+                            zdjecieZgraczem.Source = new BitmapImage(new Uri("/resource/ninja2Niewidzialny.png", UriKind.Relative));
+                        }
                         blokadaKlawiatury = false;
                     }
                 }
             }
 
-            if (HpGracza < 100 && HpGracza > 75)
-            {
-                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp4.png", UriKind.Relative));
-            }
-            else if(HpGracza == 75)
-            {
-                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp75.png", UriKind.Relative));
-            }
-            else if(HpGracza < 75 && HpGracza > 50)
-            {
-                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp3.png", UriKind.Relative));
-            }
-            else if(HpGracza == 50)
-            {
-                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp50.png", UriKind.Relative));
-            }
-            else if(HpGracza < 50 && HpGracza > 25)
-            {
-                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp2.png", UriKind.Relative));
-            }
-            else if(HpGracza == 25)
-            {
-                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp25.png", UriKind.Relative));
-            }
-            else if(HpGracza < 25 && HpGracza > 0)
-            {
-                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp1.png", UriKind.Relative));
-            }
-            else if(HpGracza <= 0)
-            {
-                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp0.png", UriKind.Relative));
-                MessageBox.Show("Przegrałeś!");
-                NavigationService.Navigate(new Uri("strony/menuGlowne.xaml", UriKind.Relative));
-            }
+            aktualizujHp();
         }
 
         public void sprawdzObrazeniaWrogow()
@@ -744,6 +787,46 @@ namespace ogrodnikRPG.strony
             }
         }
 
+        public void aktualizujHp()
+        {
+            int HpGracza = gracz.getHp();
+
+            if (HpGracza < 100 && HpGracza > 75)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp4.png", UriKind.Relative));
+            }
+            else if (HpGracza == 75)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp75.png", UriKind.Relative));
+            }
+            else if (HpGracza < 75 && HpGracza > 50)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp3.png", UriKind.Relative));
+            }
+            else if (HpGracza == 50)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp50.png", UriKind.Relative));
+            }
+            else if (HpGracza < 50 && HpGracza > 25)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp2.png", UriKind.Relative));
+            }
+            else if (HpGracza == 25)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp25.png", UriKind.Relative));
+            }
+            else if (HpGracza < 25 && HpGracza > 0)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp1.png", UriKind.Relative));
+            }
+            else if (HpGracza <= 0)
+            {
+                wskaznikHp.Source = new BitmapImage(new Uri("/resource/hp0.png", UriKind.Relative));
+                MessageBox.Show("Przegrałeś!");
+                NavigationService.Navigate(new Uri("strony/menuGlowne.xaml", UriKind.Relative));
+            }
+        }
+
         public async Task atakuj(Image pole, int x, int y)
         {
             List<Przedmiot> ekwipunek = gracz.getEkwipunek();
@@ -756,7 +839,7 @@ namespace ogrodnikRPG.strony
             {
                 if(wrog.getPozycjaX() == x && wrog.getPozycjaY() == y) //znajdujemy wroga na ktorego kliknelismy
                 {
-                    //wrog.zmniejszHp(zadawaneObrazenia);
+                    wrog.zmniejszHp(zadawaneObrazenia);
 
                     blokadaKlawiatury = true;
                     pole.Source = new BitmapImage(new Uri("/resource/" + wrog.getNazwa() + "Obrazenia.png", UriKind.Relative));
@@ -848,13 +931,31 @@ namespace ogrodnikRPG.strony
             sprawdzObrazeniaWrogow();
             sprawdzWygrana();
 
+            if (gracz.getTuryNiewidzialnosci() == 0)
+            {
+                int graczX = gracz.getPozycjaX();
+                int graczY = gracz.getPozycjaY();
+                gracz.setNiewidzialnosc(false);
+
+                foreach (var pole in plansza1.getPolaPlanszy()) //szukanie pola na ktorym jest gracz
+                {
+                    var (x, y) = ((int, int))pole.Tag;
+
+                    if (graczX == x && graczY == y)
+                    {
+                        pole.Source = new BitmapImage(new Uri("/resource/ninja2.png", UriKind.Relative));
+                    }
+                }
+            }
+            if (gracz.getNiewidzialnosc() == true) gracz.zmniejszTureNiewidz();
+
             foreach(var wrog in wrogowie) //poruszanie sie wrogow chwast sie nie rusza 
             {
                 if(wrog is Stonka stonka)
                 {
                     stonkaPoruszanie(stonka);
                 }
-                else if(wrog is Krecik krecik)
+                else if(wrog is Krecik krecik && gracz.getNiewidzialnosc() == false)
                 {
                     krecikPoruszanie(krecik);
                 }
@@ -872,12 +973,17 @@ namespace ogrodnikRPG.strony
             if(nrPlanszy.Content.ToString() == "Plansza 1")
             {
                 nrPlanszy.Content = "Plansza 2";
+                wskaznikKwiatkow.Content = "Kwiatki: 0/4";
                 plansza2Setup();
             }
-            else
+            else if(nrPlanszy.Content.ToString() == "Plansza 2")
             {
                 nrPlanszy.Content = "Plansza 3";
                 plansza3Setup();
+            }
+            else
+            {
+                nrPlanszy.Content = "Wygrana";
             }
 
         }
@@ -887,10 +993,23 @@ namespace ogrodnikRPG.strony
             stworzPostac();
             gracz.setPozycjaX(0);
             gracz.setPozycjaY(0);
+            gracz.setKwiatki(0);
 
             stworzWroga("chwast");
             stworzWroga("chwast");
             stworzWroga("chwast");
+            stworzWroga("stonka");
+            stworzWroga("stonka");
+            stworzWroga("krecik");
+            stworzWroga("krecik");
+
+            stworzPrzedmiot("miksturaLeczenia");
+            stworzPrzedmiot("spray");
+            stworzPrzedmiot("lopata");
+
+            stworzKwiatka("kwiatek1");
+            stworzKwiatka("kwiatek2");
+            stworzKwiatka("kwiatek3");
         }
 
         public void plansza3Setup()
@@ -898,8 +1017,26 @@ namespace ogrodnikRPG.strony
             stworzPostac();
             gracz.setPozycjaX(0);
             gracz.setPozycjaY(0);
+            gracz.setKwiatki(0);
 
             stworzWroga("chwast");
+            stworzWroga("chwast");
+            stworzWroga("chwast");
+            stworzWroga("stonka");
+            stworzWroga("stonka");
+            stworzWroga("stonka");
+            stworzWroga("stonka");
+            stworzWroga("krecik");
+            stworzWroga("krecik");
+            stworzWroga("krecik");
+
+            stworzPrzedmiot("miksturaNiewidzialnosci");
+            stworzPrzedmiot("miksturaLeczenia");
+            stworzPrzedmiot("dynamit");
+
+            stworzKwiatka("kwiatek1");
+            stworzKwiatka("kwiatek2");
+            stworzKwiatka("kwiatek3");
         }
 
         public void wyczyscWszystkiePola()
@@ -962,6 +1099,12 @@ namespace ogrodnikRPG.strony
                         aktualizujPrzedmioty();
                     }  
                     break;
+
+                case Key.H:
+                    uzyjMikstrury();
+                    ruchyPrzeciwnikow();
+                    break;
+
             }
         }
 

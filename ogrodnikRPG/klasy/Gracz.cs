@@ -13,6 +13,8 @@ namespace ogrodnikRPG.klasy
         private int zebraneKwiatki = 0;
         private List<Przedmiot> ekwipunek = new List<Przedmiot>();
         private int aktywnyPrzedmiot = 0;
+        private bool czyNiewidzialny = false;
+        private int turyNiewiedzialonsci = 0;
 
         public Gracz()
         {
@@ -39,9 +41,19 @@ namespace ogrodnikRPG.klasy
             return zebraneKwiatki;
         }
 
+        public void setKwiatki(int x)
+        {
+            zebraneKwiatki = x;
+        }
+
         public int getHp()
         {
             return hp;
+        }
+
+        public void setHp(int hp)
+        {
+            this.hp = hp;
         }
 
         public void zmniejszHp(int ilosc)
@@ -67,6 +79,31 @@ namespace ogrodnikRPG.klasy
         public void setAktywnyPrzedmiot(int x)
         {
             aktywnyPrzedmiot = x;
+        }
+
+        public void setNiewidzialnosc(bool x)
+        {
+            czyNiewidzialny = x;
+        }
+
+        public bool getNiewidzialnosc()
+        {
+            return czyNiewidzialny;
+        }
+
+        public void setTuryNiewidzialnosci(int x)
+        {
+            turyNiewiedzialonsci = x;
+        }
+
+        public int getTuryNiewidzialnosci()
+        {
+            return turyNiewiedzialonsci;
+        }
+
+        public void zmniejszTureNiewidz()
+        {
+            turyNiewiedzialonsci--;
         }
     }
 }

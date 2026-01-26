@@ -13,7 +13,7 @@
     <None Remove="resource\aktywnePrzedmioty\lopataAktywny.png" />
     <None Remove="resource\aktywnePrzedmioty\malaLopatkaAktywny.png" />
     <None Remove="resource\aktywnePrzedmioty\miksturaLeczeniaAktywny.png" />
-    <None Remove="resource\aktywnePrzedmioty\miksturaNiewidzialonsciAktywny.png" />
+    <None Remove="resource\aktywnePrzedmioty\miksturaNiewidzialnosciAktywny.png" />
     <None Remove="resource\aktywnePrzedmioty\sekatorAktywny.png" />
     <None Remove="resource\aktywnePrzedmioty\sprayAktywny.png" />
     <None Remove="resource\chwast.png" />
@@ -41,6 +41,7 @@
     <None Remove="resource\miksturaNiewidzialonsci.png" />
     <None Remove="resource\ninja.png" />
     <None Remove="resource\ninja2.png" />
+    <None Remove="resource\ninja2Niewidzialny.png" />
     <None Remove="resource\ninja2Obrazenia.png" />
     <None Remove="resource\ogrodnik.png" />
     <None Remove="resource\sekator.png" />
@@ -68,7 +69,7 @@
     <Resource Include="resource\aktywnePrzedmioty\miksturaLeczeniaAktywny.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resource\aktywnePrzedmioty\miksturaNiewidzialonsciAktywny.png">
+    <Resource Include="resource\aktywnePrzedmioty\miksturaNiewidzialnosciAktywny.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\aktywnePrzedmioty\sekatorAktywny.png">
@@ -84,6 +85,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\krecikObrazenia.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resource\ninja2Niewidzialny.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resource\ninja2Obrazenia.png">
